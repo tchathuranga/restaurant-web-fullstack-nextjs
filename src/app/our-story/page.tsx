@@ -1,4 +1,8 @@
 import Banner from "@/components/common/Banner";
+import WeAreSection from "@/components/our-story/WeAreSection";
+import OurSpecialtiesSection from "@/components/our-story/OurSpecialtiesSection";
+import OurLocationsSection from "@/components/our-story/OurLocationsSection";
+import GallerySection from "@/components/our-story/GallerySection";
 import { Lora, Noto_Sans } from "next/font/google";
 
 const lora = Lora({
@@ -17,13 +21,17 @@ export default function OurStory() {
             <Banner
                 singleImage="/images/ourStoryBanner.png"
                 content={{
-                    title: "Our Story",
+                    title: "Our Story...",
                     subtitle: "Welcome to Sri Vihar Indian Restaurant.",
                     titleFont: lora,
                     subtitleFont: notoSans,
                     titleFontSize: "font-medium",
                 }}
             />
+            <WeAreSection />
+            <OurSpecialtiesSection />
+            <OurLocationsSection />
+            <GallerySection />
         </div>
     )
 }

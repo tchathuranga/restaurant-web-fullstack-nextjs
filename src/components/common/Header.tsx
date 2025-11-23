@@ -1,43 +1,46 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { NAVIGATION_LINKS, FOOD_MENU_ITEMS, OPENING_HOURS } from '@/const/headerContens';
 
 const Header = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [showOpeningHours, setShowOpeningHours] = useState(false);
   const [showFoodMenu, setShowFoodMenu] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const navigationLinks = [
-    { name: 'Outdoor Catering', href: '/outdoor-catering' },
-    { name: 'Join the Team', href: '/join-the-team' },
-    { name: 'Contact Us', href: '/contact-us' },
-    { name: 'News Feed', href: '/news-feed' },
-    { name: 'Our Story', href: '/our-story' },
-  ];
+  const handleFoodMenuItemClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, dishName: string) => {
+      event.preventDefault();
 
-  const foodMenuItems = [
-    { name: 'All', href: '/food-menu' },
-    { name: 'Appetizers', href: '/food-menu/appetizers' },
-    { name: 'Desserts', href: '/food-menu/desserts' },
-    { name: 'Beverages', href: '/food-menu/beverages' },
-    { name: 'Special Menu', href: '/food-menu/special' },
-  ];
+      const encodedCategory = encodeURIComponent(dishName);
+      setActiveLink('Food Menu');
+      setShowFoodMenu(false);
+      setShowMobileMenu(false);
 
-  const openingHours = [
-    'Monday - Friday: 11:00 AM - 10:00 PM',
-    'Saturday: 10:00 AM - 11:00 PM',
-    'Sunday: 10:00 AM - 9:00 PM'
-  ];
+      if (pathname === '/food-menu') {
+        window.dispatchEvent(
+          new CustomEvent('food-menu-select', { detail: dishName })
+        );
+      } else {
+        router.push(`/food-menu?category=${encodedCategory}`);
+      }
+    },
+    [pathname, router]
+  );
 
   return (
     <header className="bg-white relative z-50">
       {/* Top section with logo */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-center">
-          <a href="/" className="cursor-pointer">
+          <Link href="/" className="cursor-pointer">
             <Image
               src="/images/Logo.png"
               alt="Sri Vihar Logo"
@@ -46,7 +49,7 @@ const Header = () => {
               className="object-contain lg:w-[190px] lg:h-[80px]"
               priority
             />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -72,7 +75,7 @@ const Header = () => {
               <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Opening Hours</h3>
-                  {openingHours.map((hours, index) => (
+                  {OPENING_HOURS.map((hours, index) => (
                     <p key={index} className="text-sm text-gray-600 mb-1">
                       {hours}
                     </p>
@@ -84,10 +87,23 @@ const Header = () => {
 
           {/* Navigation Links - Center */}
           <nav className="flex space-x-8 items-center">
+            {/* Home Link */}
+            <Link
+              href="/"
+              onClick={() => setActiveLink('Home')}
+              className={`text-sm font-medium transition-colors whitespace-nowrap ${
+                activeLink === 'Home' 
+                  ? 'text-[#F67A08]' 
+                  : 'text-gray-700 hover:text-[#F67A08]'
+              }`}
+            >
+              Home
+            </Link>
+
             {/* Food Menu Dropdown */}
             <div className="relative">
               <div className="flex items-center">
-                <a
+                <Link
                   href="/food-menu"
                   onClick={() => setActiveLink('Food Menu')}
                   className={`text-sm font-medium transition-colors ${
@@ -97,7 +113,7 @@ const Header = () => {
                   }`}
                 >
                   Food Menu
-                </a>
+                </Link>
                 <button
                   onClick={() => setShowFoodMenu(!showFoodMenu)}
                   className="ml-1 text-gray-700 hover:text-[#F67A08] transition-colors"
@@ -112,23 +128,31 @@ const Header = () => {
               {showFoodMenu && (
                 <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                   <div className="py-2">
-                    {foodMenuItems.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    {FOOD_MENU_ITEMS.map((item) => {
+                      const encodedHref = `/food-menu?category=${encodeURIComponent(
+                        item.name
+                      )}`;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={encodedHref}
+                          onClick={(event) =>
+                            handleFoodMenuItemClick(event, item.name)
+                          }
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
             </div>
 
             {/* Other Navigation Links */}
-            {navigationLinks.map((link) => (
-              <a
+            {NAVIGATION_LINKS.map((link) => (
+              <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setActiveLink(link.name)}
@@ -139,7 +163,7 @@ const Header = () => {
                 }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
@@ -164,7 +188,7 @@ const Header = () => {
               <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Opening Hours</h3>
-                  {openingHours.map((hours, index) => (
+                  {OPENING_HOURS.map((hours, index) => (
                     <p key={index} className="text-sm text-gray-600 mb-1">
                       {hours}
                     </p>
@@ -185,14 +209,32 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {showMobileMenu && (
-          <div className="lg:hidden mt-4 bg-white border border-gray-200 rounded-md shadow-lg">
+          <div className="lg:hidden mt-4 bg-white border border-gray-200 rounded-md shadow-lg relative z-50">
             <div className="py-2">
+              {/* Home Link */}
+              <Link
+                href="/"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveLink('Home');
+                  setShowMobileMenu(false);
+                }}
+                className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                  activeLink === 'Home' 
+                    ? 'text-[#F67A08]' 
+                    : 'text-gray-700 hover:text-[#F67A08]'
+                }`}
+              >
+                Home
+              </Link>
+
               {/* Food Menu with dropdown */}
               <div className="relative">
                 <div className="flex items-center justify-between px-4 py-2">
-                  <a
-                    href="/menu/all"
-                    onClick={() => {
+                  <Link
+                    href="/food-menu"
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setActiveLink('Food Menu');
                       setShowMobileMenu(false);
                     }}
@@ -203,9 +245,12 @@ const Header = () => {
                     }`}
                   >
                     Food Menu
-                  </a>
+                  </Link>
                   <button
-                    onClick={() => setShowFoodMenu(!showFoodMenu)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowFoodMenu(!showFoodMenu);
+                    }}
                     className="p-1 text-gray-700 hover:text-[#F67A08] transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,26 +262,35 @@ const Header = () => {
                 {/* Food Menu Dropdown in Mobile */}
                 {showFoodMenu && (
                   <div className="bg-gray-50 border-t border-gray-200">
-                    {foodMenuItems.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setShowMobileMenu(false)}
-                        className="block px-8 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    {FOOD_MENU_ITEMS.map((item) => {
+                      const encodedHref = `/food-menu?category=${encodeURIComponent(
+                        item.name
+                      )}`;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={encodedHref}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleFoodMenuItemClick(event, item.name);
+                          }}
+                          className="block px-8 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
 
               {/* Other Navigation Links */}
-              {navigationLinks.map((link) => (
-                <a
+              {NAVIGATION_LINKS.map((link) => (
+                <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setActiveLink(link.name);
                     setShowMobileMenu(false);
                   }}
@@ -247,7 +301,7 @@ const Header = () => {
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -258,10 +312,13 @@ const Header = () => {
       {(showOpeningHours || showFoodMenu || showMobileMenu) && (
         <div
           className="fixed inset-0 z-40"
-          onClick={() => {
-            setShowOpeningHours(false);
-            setShowFoodMenu(false);
-            setShowMobileMenu(false);
+          onClick={(e) => {
+            // Only close if clicking directly on the overlay, not on child elements
+            if (e.target === e.currentTarget) {
+              setShowOpeningHours(false);
+              setShowFoodMenu(false);
+              setShowMobileMenu(false);
+            }
           }}
         />
       )}

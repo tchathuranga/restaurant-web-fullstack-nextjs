@@ -1,9 +1,10 @@
-import Image from "next/image";
 import React from "react";
 import Banner from "@/components/common/Banner";
 import NewsField from "@/components/common/NewsField";
 import PopularDishes from "@/components/home/PopularDishes";
 import OurValues from "@/components/home/OurValues";
+import FreqQuestion from "@/components/home/FreqQuestion";
+import Promotions from "@/components/home/Promotions";
 import { Kalam, Noto_Sans } from "next/font/google";
 
 const kalam = Kalam({
@@ -44,6 +45,9 @@ export default function Home() {
 
       <PopularDishes />
       <OurValues />
+      <FreqQuestion />
+      <Promotions />
+      
     </div>
   );
 }

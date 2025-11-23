@@ -67,6 +67,26 @@ const PopularDishes = () => {
 
   return (
     <div className="text-center py-8 relative">
+      {/* Bottom Left Background Image */}
+      <Image
+        src="/images/mandala-bottom-left-icon.png"
+        alt=""
+        className="hidden lg:block absolute left-0 bottom-0 h-auto pointer-events-none opacity-50"
+        width={300}
+        height={300}
+      />
+      
+      {/* Bottom Right Background Image */}
+      <Image
+        src="/images/mandala-bottom-right-icon.png"
+        alt=""
+        className="hidden lg:block absolute right-0 bottom-0 h-auto pointer-events-none opacity-50"
+        width={300}
+        height={300}
+      />
+
+      {/* Content */}
+      <div className="relative z-10">
       <h2 className={`font-bold mb-8 text-gray-900 ${lora.className}`} style={{ fontSize: '34px' }}>
         Popular Dishes
       </h2>
@@ -102,25 +122,7 @@ const PopularDishes = () => {
         ))}
       </div>
 
-      {/* Bottom Corner Images */}
-      {/* <div className="absolute bottom-0 left-0 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
-        <Image
-          src="/images/left-bg-icon"
-          alt="Bottom left decoration"
-          className="object-cover"
-          width={1000}
-          height={1000}
-        />
       </div>
-      
-      <div className="absolute bottom-0 right-0 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
-        <Image
-          src="/images/write-bg-icon"
-          alt="Bottom right decoration"
-          fill
-          className="object-cover"
-        />
-      </div> */}
     </div>
   );
 };

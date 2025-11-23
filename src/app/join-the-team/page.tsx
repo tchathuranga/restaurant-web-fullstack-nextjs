@@ -1,5 +1,8 @@
 import Banner from "@/components/common/Banner";
 import { Lora, Noto_Sans } from "next/font/google";
+import CurrentJobs from "@/components/join-the-team/CurrentJobs"
+import FutureJobs from "@/components/join-the-team/FutureJobs"
+import WhyJoinUs from '@/components/join-the-team/WhyJoinUs'
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -24,6 +27,10 @@ export default function JoinTheTeam() {
                     titleFontSize: "font-medium",
                 }}
             />
+
+            <CurrentJobs />
+            <FutureJobs />
+            <WhyJoinUs />
         </div>
     )
 }

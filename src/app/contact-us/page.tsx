@@ -1,5 +1,7 @@
 import Banner from "@/components/common/Banner";
 import { Lora, Noto_Sans } from "next/font/google";
+import Branches from "@/components/contact-us/Branches";
+import SendMessage from "@/components/contact-us/SendMessage"
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -24,6 +26,9 @@ export default function ContactUs() {
           titleFontSize: "font-medium",
         }}
       />
+
+      <Branches />
+      <SendMessage />
     </div>
   );
 }
