@@ -3,7 +3,8 @@
 import { Noto_Sans, Lora } from 'next/font/google';
 import { useState } from 'react';
 import Image from 'next/image';
-import ItemCardContainer from '../common/ItemCardContainer';
+import ItemContainer from '../common/ItemContainer';
+import { ITEM_DATA } from '@/const/dishes';
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -18,80 +19,37 @@ const notoSans = Noto_Sans({
 const PopularDishes = () => {
   const [selectedDish, setSelectedDish] = useState(0);
   
-  const dishes = ['Breakfast', 'Lunch', 'Dinner', 'Desserts', 'Drinks'];
+  const dishes = ['North Indian', 'South Indian', 'Sweets'];
 
-  const itemsData = [
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Chicken Biryani",
-      description: "Aromatic basmati rice cooked with tender chicken pieces and traditional spices",
-      price: "$12.99",
-      imageAlt: "Delicious chicken biryani"
-    },
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Butter Chicken",
-      description: "Creamy and rich butter chicken with tender pieces in a flavorful tomato-based sauce",
-      price: "$14.99",
-      imageAlt: "Delicious butter chicken"
-    },
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Paneer Tikka",
-      description: "Grilled cottage cheese marinated in aromatic spices and served with mint chutney",
-      price: "$11.99",
-      imageAlt: "Delicious paneer tikka"
-    },
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Masala Dosa",
-      description: "Crispy South Indian crepe filled with spiced potato filling and served with sambar",
-      price: "$9.99",
-      imageAlt: "Delicious masala dosa"
-    },
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Tandoori Chicken",
-      description: "Marinated chicken cooked in traditional clay oven with aromatic spices",
-      price: "$16.99",
-      imageAlt: "Delicious tandoori chicken"
-    },
-    {
-      image: "/images/here-slider/hero-slide1.png",
-      title: "Tandoori Chicken",
-      description: "Marinated chicken cooked in traditional clay oven with aromatic spices",
-      price: "$16.99",
-      imageAlt: "Delicious tandoori chicken"
-    }
-  ];
+  // Filter ITEM_DATA by selected category
+  const filteredItems = ITEM_DATA.filter(item => item.category === dishes[selectedDish]);
 
   return (
-    <div className="text-center py-8 relative">
+    <div className="px-4 md:px-10 lg:px-30 pb-20">
       {/* Bottom Left Background Image */}
       <Image
         src="/images/mandala-bottom-left-icon.png"
         alt=""
-        className="hidden lg:block absolute left-0 bottom-0 h-auto pointer-events-none opacity-50"
-        width={300}
-        height={300}
+        className="hidden md:block absolute left-0 bottom-0 h-auto pointer-events-none opacity-40"
+        width={180}
+        height={180}
       />
-      
       {/* Bottom Right Background Image */}
       <Image
         src="/images/mandala-bottom-right-icon.png"
         alt=""
-        className="hidden lg:block absolute right-0 bottom-0 h-auto pointer-events-none opacity-50"
-        width={300}
-        height={300}
+        className="hidden md:block absolute right-0 bottom-0 h-auto pointer-events-none opacity-40"
+        width={180}
+        height={180}
       />
 
       {/* Content */}
-      <div className="relative z-10">
-      <h2 className={`font-bold mb-8 text-gray-900 ${lora.className}`} style={{ fontSize: '34px' }}>
+      <div className="relative z-10 text-center">
+      <h2 className={`px-2 md:px-10 font-bold text-gray-900 py-6 md:py-10 ${lora.className}`} style={{ fontSize: '28px' }}>
         Popular Dishes
       </h2>
       
-      <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-20">
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-10">
         {dishes.map((dish, index) => (
           <button
             key={dish}
@@ -109,14 +67,12 @@ const PopularDishes = () => {
       </div>
 
       {/* Grid Container for Item Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-20 max-w-7xl mx-auto p-10">
-        {itemsData.map((item, index) => (
-          <ItemCardContainer 
-            key={index}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-12 max-w-7xl mx-auto p-2 md:p-8">
+        {filteredItems.map((item, idx) => (
+          <ItemContainer
+            key={idx}
             image={item.image}
             title={item.title}
-            description={item.description}
-            price={item.price}
             imageAlt={item.imageAlt}
           />
         ))}

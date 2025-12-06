@@ -41,7 +41,7 @@ const cards: Card[] = [
 
 const OurValues = () => {
   return (
-    <div className="text-center py-8 relative" style={{ backgroundColor: '#FFF1D6' }}>
+    <div className="text-center px-4 md:px-10 lg:px-30 py-20 relative" style={{ backgroundColor: '#FFF1D6' }}>
       <h2 className={`font-bold mb-8 text-gray-900 ${lora.className}`} style={{ fontSize: '34px' }}>Our Values</h2>
       <CardContainer cards={cards} />
     </div>

@@ -11,7 +11,8 @@ export const NAVIGATION_LINKS = [
 export const FOOD_MENU_ITEMS : FoodMenuItemsProps[] = [
     { name: 'All', href: '/food-menu' },
     { name: 'Cafe Items', href: '/food-menu/Cafe Items' },
-    { name: 'Indian', href: '/food-menu/Indian' },
+    { name: 'North Indian', href: '/food-menu/north-Indian' },
+    { name: 'South Indian', href: '/food-menu/south-Indian' },
     { name: 'Cakes', href: '/food-menu/Cakes' },
     { name: 'Ice Cream', href: '/food-menu/Ice Cream' },
     { name: 'Chaat Items', href: '/food-menu/Chaat Items' },

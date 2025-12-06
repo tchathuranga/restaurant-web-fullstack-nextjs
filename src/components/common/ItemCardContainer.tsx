@@ -29,6 +29,7 @@ const ItemCardContainer = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 max-w-sm mx-auto">
       {/* Image Section - Top */}
+
       <div className="relative w-full h-48">
         <Image
           src={image}

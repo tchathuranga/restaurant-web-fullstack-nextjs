@@ -1,6 +1,9 @@
+"use client";
+
 import Banner from "@/components/common/Banner";
 import WhatsNewSection from "@/components/news-feed/WhatsNewSection";
 import { Lora, Noto_Sans } from "next/font/google";
+import SlideUpSection from "@/components/common/SlideUpSection";
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -50,7 +53,9 @@ export default function NewsFeed() {
                     titleFontSize: "font-medium",
                 }}
             />
-            <WhatsNewSection newsItems={newsItems} />
+            <SlideUpSection> 
+                <WhatsNewSection newsItems={newsItems} />
+            </SlideUpSection>
         </div>
     )
 }
