@@ -58,8 +58,8 @@ const jobData = [
 
 export default function CurrentJobs() {
     return(
-        <div className="lg:px-30 md:px-20 sm:px-10 px-10 pb-6 mx-auto" style={{backgroundColor: "#FBFBFA"}}>
-            <h2 className={`px-10 font-bold text-gray-900 text-center py-6 ${lora.className}`} style={{ fontSize: '34px' }}>
+        <div className="lg:px-30 md:px-20 sm:px-10 px-10 pb-6  mx-auto" style={{backgroundColor: "#FBFBFA"}}>
+            <h2 className={`px-10 font-bold text-gray-900 text-center py-10 ${lora.className}`} style={{ fontSize: '34px' }}>
                 Current Job Openings
             </h2>
             

@@ -20,7 +20,7 @@ const fields = [
 export default function FutureJobs() {
     return(
         <div className="bg-white lg:px-30 md:px-20 sm:px-10 px-6 pb-6 mx-auto">
-            <h2 className={`font-bold text-gray-900 text-center py-4 ${lora.className}`} style={{ fontSize: '34px' }}>
+            <h2 className={`font-bold text-gray-900 text-center py-10 ${lora.className}`} style={{ fontSize: '34px' }}>
                 Future Opportunities
             </h2>
             <p className={`text-center text-gray-600 max-w-2xl mx-auto pb-6 ${notoSans.className}`} style={{ fontSize: '16px' }}>

@@ -4,4 +4,5 @@ export interface ItemDataProps {
     description: string;
     price: string;
     imageAlt: string;
+    category: string;
 }

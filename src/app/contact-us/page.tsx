@@ -1,22 +1,25 @@
+"use client";
+
 import Banner from "@/components/common/Banner";
 import { Lora, Noto_Sans } from "next/font/google";
 import Branches from "@/components/contact-us/Branches";
-import SendMessage from "@/components/contact-us/SendMessage"
+import SendMessage from "@/components/contact-us/SendMessage";
+import SlideUpSection from "@/components/common/SlideUpSection";
 
 const lora = Lora({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 const notoSans = Noto_Sans({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 export default function ContactUs() {
   return (
     <div>
-      <Banner 
+      <Banner
         singleImage="/images/contactUsBanner.png"
         content={{
           title: "Contact Us",
@@ -27,8 +30,13 @@ export default function ContactUs() {
         }}
       />
 
-      <Branches />
-      <SendMessage />
+      <SlideUpSection>
+        <Branches />
+      </SlideUpSection>
+      
+      <SlideUpSection>
+        <SendMessage />
+      </SlideUpSection>
     </div>
   );
 }

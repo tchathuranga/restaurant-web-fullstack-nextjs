@@ -9,6 +9,7 @@ import Dishes from "@/components/food-menu/Dishes";
 import { ITEM_DATA } from "@/const/dishes";
 import { FOOD_MENU_ITEMS } from "@/const/headerContens";
 
+
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
@@ -94,7 +95,7 @@ function FoodMenuContent() {
         }}
       />
 
-      <div className="sticky top-0 z-10 bg-[#F5E6D8]">
+      <div className="sticky top-0 z-100 bg-[#F5E6D8]">
         <FilterBar
           activeIndex={selectedFilterIndex}
           onSelect={handleFilterSelect}
