@@ -35,9 +35,9 @@ export default function OurStory() {
         <WeAreSection />
       </SlideUpSection>
 
-      <SlideUpSection>
+      {/* <SlideUpSection>
         <OurSpecialtiesSection />
-      </SlideUpSection>
+      </SlideUpSection> */}
 
       <SlideUpSection>
         <OurLocationsSection />
