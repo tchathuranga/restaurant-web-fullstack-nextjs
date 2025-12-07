@@ -75,7 +75,7 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
               width={1920}
               height={1080}
               priority={index === 0}
-              className="w-full h-auto object-cover sm:object-contain max-h-[95vh] sm:max-h-[80vh] min-h-[60vh] sm:min-h-auto"
+              className="  object-cover sm:object-contain max-h-[95vh] sm:max-h-[80vh] min-h-[60vh] sm:min-h-auto"
             />
           </div>
         ))}
@@ -129,23 +129,27 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
             {/* Title */}
             {content.title && (
               <h1 
-                className={`${content.titleFontSize} mb-4 lg:mb-6 ${content.titleFont?.className}`}
+                className={`mb-4 lg:mb-6 ${content.titleFontSize} ${content.titleFont?.className} bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]`}
                 style={{ 
-                  fontSize: 'clamp(28px, 5vw, 48px)',
-                  lineHeight: '1.2'
+                  fontSize: 'clamp(32px, 6vw, 54px)',
+                  lineHeight: '1.15',
+                  letterSpacing: '1px',
+                  textShadow: '0 2px 12px rgba(0,0,0,0.18), 0 1px 0 #fff'
                 }}
               >
                 {content.title}
               </h1>
             )}
-            
+
             {/* Subtitle */}
             {content.subtitle && (
               <p 
-                className={`mb-6 lg:mb-8 opacity-90 ${content.subtitleFont?.className}`}
+                className={`mb-6 lg:mb-8 opacity-95 ${content.subtitleFont?.className} px-4 py-2 rounded-xl inline-block bg-white/20 backdrop-blur-sm shadow-md text-shadow-lg`}
                 style={{ 
-                  fontSize: 'clamp(16px, 3vw, 20px)',
-                  lineHeight: '1.4'
+                  fontSize: 'clamp(18px, 3vw, 24px)',
+                  lineHeight: '1.4',
+                  color: '#fff',
+                  textShadow: '0 2px 8px rgba(0,0,0,0.18)'
                 }}
               >
                 {content.subtitle}
