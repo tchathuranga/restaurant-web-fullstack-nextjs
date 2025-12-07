@@ -26,9 +26,9 @@ export default function Home() {
     <div>
       <Banner
         sliderImages={[
-          "/images/here-slider/hero-slide1.png",
-          "/images/here-slider/hero-slide2.png",
-          "/images/here-slider/hero-slide3.png",
+          "/images/here-slider/hero-1.png",
+          "/images/here-slider/hero-2.png",
+          "/images/here-slider/hero-3.png",
         ]}
         content={{
           title: "Authentic Indian Cuisine!",
@@ -42,7 +42,7 @@ export default function Home() {
 
       <SlideUpSection>
         <NewsField
-          image="/images/news1.png"
+          image="/images/news2.png"
           title="Grand Opening: Now Serving in Dehiwala!"
           description="We’re excited to announce the grand opening of our newest branch in Dehiwala. Enjoy authentic Indian flavors with a 20% discount for the first week!"
           seeMoreLink="/news/grand-opening"
