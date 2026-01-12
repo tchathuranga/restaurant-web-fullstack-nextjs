@@ -6,6 +6,7 @@ import CurrentJobs from "@/components/join-the-team/CurrentJobs";
 import FutureJobs from "@/components/join-the-team/FutureJobs";
 import WhyJoinUs from "@/components/join-the-team/WhyJoinUs";
 import SlideUpSection from "@/components/common/SlideUpSection";
+import { jobData } from "@/const/jobData";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -30,9 +31,12 @@ export default function JoinTheTeam() {
           titleFontSize: "font-medium",
         }}
       />
-      <SlideUpSection>
-        <CurrentJobs />
-      </SlideUpSection>
+
+      {jobData.length > 0 && (
+        <SlideUpSection>
+          <CurrentJobs JobData={jobData} />
+        </SlideUpSection>
+      )}
 
       <SlideUpSection>
         <FutureJobs />

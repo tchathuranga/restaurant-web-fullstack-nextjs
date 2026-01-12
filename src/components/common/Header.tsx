@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { NAVIGATION_LINKS, FOOD_MENU_ITEMS, OPENING_HOURS } from '@/const/headerContens';
+import { newsItems } from '@/const/news';
 
 const Header = () => {
   const router = useRouter();
@@ -61,6 +62,7 @@ const Header = () => {
           <div className="absolute left-0">
             <button
               onClick={() => setShowOpeningHours(!showOpeningHours)}
+              onMouseEnter={() => setShowOpeningHours(!showOpeningHours)}
               className="flex items-center space-x-2 px-4 py-2 text-sm font-medium bg-white border-2 border-[#F67A08] text-[#F67A08] hover:bg-gray-50 rounded-md transition-colors"
               style={{ borderColor: '#F67A08', color: '#F67A08' }}
             >
@@ -106,6 +108,7 @@ const Header = () => {
                 <Link
                   href="/food-menu"
                   onClick={() => setActiveLink('Food Menu')}
+                  onMouseEnter={() => setShowFoodMenu(!showFoodMenu)}
                   className={`text-sm font-medium transition-colors ${
                     activeLink === 'Food Menu' 
                       ? 'text-[#F67A08]' 
@@ -151,7 +154,10 @@ const Header = () => {
             </div>
 
             {/* Other Navigation Links */}
-            {NAVIGATION_LINKS.map((link) => (
+            {NAVIGATION_LINKS.filter(
+              (link) =>
+                link.name !== 'News Feed' || (link.name === 'News Feed' && newsItems.length > 0)
+            ).map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
@@ -285,7 +291,10 @@ const Header = () => {
               </div>
 
               {/* Other Navigation Links */}
-              {NAVIGATION_LINKS.map((link) => (
+              {NAVIGATION_LINKS.filter(
+                (link) =>
+                  link.name !== 'News Feed' || (link.name === 'News Feed' && newsItems.length > 0)
+              ).map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}

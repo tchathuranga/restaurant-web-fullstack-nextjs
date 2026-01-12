@@ -9,6 +9,7 @@ import FreqQuestion from "@/components/home/FreqQuestion";
 import Promotions from "@/components/home/Promotions";
 import { Kalam, Noto_Sans } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
+import { newsItems } from "@/const/news";
 
 const kalam = Kalam({
   weight: ["300", "400", "700"],
@@ -20,8 +21,10 @@ const notoSans = Noto_Sans({
   subsets: ["latin"],
 });
 
+// const PromotionsImage = "/images/promotion-bg-image.png";
+const PromotionsImage = "";
+
 export default function Home() {
-  // Animation variants for sliding effect
   return (
     <div>
       <Banner
@@ -41,12 +44,14 @@ export default function Home() {
       />
 
       <SlideUpSection>
+        {newsItems.length > 0 && (
         <NewsField
-          image="/images/news2.png"
-          title="Grand Opening: Now Serving in Dehiwala!"
-          description="We’re excited to announce the grand opening of our newest branch in Dehiwala. Enjoy authentic Indian flavors with a 20% discount for the first week!"
-          seeMoreLink="/news/grand-opening"
+          key={0}
+          image={newsItems[0].image}
+          title={newsItems[0].title}
+          description={newsItems[0].description}
         />
+        )}
       </SlideUpSection>
 
       <SlideUpSection>
@@ -61,9 +66,12 @@ export default function Home() {
         <FreqQuestion />
       </SlideUpSection>
 
-      <SlideUpSection>
-        <Promotions />
-      </SlideUpSection>
+      {PromotionsImage && (
+        <SlideUpSection>
+          <Promotions image={PromotionsImage} />
+        </SlideUpSection>
+      )}
+
     </div>
   );
 }

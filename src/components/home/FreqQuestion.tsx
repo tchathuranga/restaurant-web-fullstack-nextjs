@@ -74,6 +74,7 @@ export default function FreqQuestion() {
             <div key={index} className="border border-gray-300 rounded-lg overflow-hidden">
               <button
                 onClick={() => toggleAccordion(index)}
+                onMouseEnter={() => toggleAccordion(index)}
                 className={`w-full px-6 py-4 flex items-center justify-between ${
                   openIndex === index ? 'bg-gray-200' : 'bg-white'
                 } hover:bg-gray-100 transition-colors`}

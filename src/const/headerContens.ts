@@ -21,7 +21,7 @@ export const FOOD_MENU_ITEMS : FoodMenuItemsProps[] = [
 ];
 
 export const OPENING_HOURS: string[] = [
-    'Monday - Friday: 11:00 AM - 10:00 PM',
-    'Saturday: 10:00 AM - 11:00 PM',
-    'Sunday: 10:00 AM - 9:00 PM'
+    'Monday - Friday: 7:00 AM - 10:30 PM',
+    'Saturday: 7:00 AM - 10:30 PM',
+    'Sunday: 7:00 AM - 10:30 PM'
   ];
