@@ -56,30 +56,30 @@ const NewsDialog = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 animate-fadeIn"
       onClick={onClose}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
-      
-      {/* Dialog Content */}
+      {/* Backdrop with blur and fade-in */}
+      <div className="absolute inset-0 bg-white backdrop-blur-sm transition-opacity" />
+
+      {/* Dialog Content with gradient, border, and animation */}
       <div 
-        className="relative bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto z-10"
+        className="relative bg-white border-2 border-orange-200 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10 animate-modalIn"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors"
+          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white shadow-lg hover:bg-orange-100 border border-orange-200 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-400"
           aria-label="Close dialog"
         >
-          <X className="w-6 h-6 text-gray-700" />
+          <X className="w-6 h-6 text-orange-500" />
         </button>
 
         {/* Content */}
-        <div className="p-6 md:p-8">
+        <div className="p-4 sm:p-8 flex flex-col items-center">
           {/* Image */}
-          <div className="relative w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden">
+          <div className="relative w-full aspect-[16/9] mb-6 rounded-xl overflow-hidden border-2 border-orange-100 shadow-md">
             <Image
               src={image}
               alt={imageAlt || title}
@@ -91,17 +91,41 @@ const NewsDialog = ({
 
           {/* Title */}
           <h2 
-            className={`text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6 ${lora.className}`}
+            className={`text-2xl md:text-3xl lg:text-3xl font-extrabold text-gray-900 mb-4 md:mb-6 drop-shadow-sm text-center  ${lora.className}`}
           >
             {title}
           </h2>
 
           {/* Description */}
-          <div className={`text-gray-700 text-base md:text-lg leading-relaxed ${notoSans.className}`}>
+          <div className={`text-gray-700 text-base md:text-lg leading-relaxed text-justify   ${notoSans.className}`}>
             <p className="whitespace-pre-line">{description}</p>
           </div>
+          <button
+            onClick={onClose}
+            className="mt-8 px-6 py-2 rounded-full bg-[#F67A08] text-white font-semibold shadow hover:bg-orange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-400"
+          >
+            Close
+          </button>
         </div>
       </div>
+
+      {/* Animations */}
+      <style jsx>{`
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease;
+        }
+        .animate-modalIn {
+          animation: modalIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes modalIn {
+          from { opacity: 0; transform: scale(0.95) translateY(20px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Banner from "@/components/common/Banner";
 import WhatsNewSection from "@/components/news-feed/WhatsNewSection";
 import { Lora, Noto_Sans } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
+import { newsItems } from "@/const/news";
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -16,30 +17,6 @@ const notoSans = Noto_Sans({
 });
 
 export default function NewsFeed() {
-    // Sample news items - replace with actual data from API or CMS
-    const newsItems = [
-        {
-            image: "/images/news1.png",
-            title: "Grand Opening: Now Serving in Dehiwala!",
-            description: "We're excited to announce the grand opening of our newest branch in Dehiwala. Enjoy authentic Indian flavors with a 20% discount for the first week!",
-            seeMoreLink: "/news/grand-opening-dehiwala",
-            imageAlt: "Chef serving Indian food"
-        },
-        {
-            image: "/images/news1.png",
-            title: "Grand Opening: Now Serving in Dehiwala!",
-            description: "We're excited to announce the grand opening of our newest branch in Dehiwala. Enjoy authentic Indian flavors with a 20% discount for the first week!",
-            seeMoreLink: "/news/grand-opening-dehiwala",
-            imageAlt: "Chef serving Indian food"
-        },
-        {
-            image: "/images/news1.png",
-            title: "Grand Opening: Now Serving in Dehiwala!",
-            description: "We're excited to announce the grand opening of our newest branch in Dehiwala. Enjoy authentic Indian flavors with a 20% discount for the first week!",
-            seeMoreLink: "/news/grand-opening-dehiwala",
-            imageAlt: "Chef serving Indian food"
-        }
-    ];
 
     return (
         <div>

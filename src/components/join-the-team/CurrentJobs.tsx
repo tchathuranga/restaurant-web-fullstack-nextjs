@@ -1,6 +1,9 @@
 import { Lora, Noto_Sans } from "next/font/google";
 import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
+import { jobData } from "@/const/jobData";
+import { JobData } from "@/interfaces/job";
+
 
 const lora = Lora({
     weight: ['400', '500', '600', '700'],
@@ -12,51 +15,11 @@ const notoSans = Noto_Sans({
     subsets: ['latin'],
 });
 
-const jobData = [
-    {
-        id:1,
-        title: "South Indian Cook",
-        location: "Colombo 5, Sri Lanka",
-        employmentType: "Full-Time",
-        requirements: [
-            "Experience Level: 2-5 Years",
-            "Availability: Immediate",
-            "Skills: Cooking, South Indian, Vegetarian",
-            "Team Player",
-            "Menu Development"
-        ]
-    },
-    {
-        id:2,
-        title: "South Indian Cook",
-        location: "Colombo 5, Sri Lanka",
-        employmentType: "Full-Time",
-        requirements: [
-            "Experience Level: 2-5 Years",
-            "Availability: Immediate",
-            "Skills: Cooking, South Indian, Vegetarian",
-            "Team Player",
-            "Menu Development"
-        ]
-    },
-    {
-        id:3,
-        title: "South Indian Cook",
-        location: "Colombo 5, Sri Lanka",
-        employmentType: "Full-Time",
-        requirements: [
-            "Experience Level: 2-5 Years",
-            "Availability: Immediate",
-            "Skills: Cooking, South Indian, Vegetarian",
-            "Team Player",
-            "Menu Development"
-        ]
-    }
-]
+interface CurrentJobsProps {
+  JobData : JobData[];
+}
 
- 
-
-export default function CurrentJobs() {
+export default function CurrentJobs({ JobData }: CurrentJobsProps) {
     return(
         <div className="lg:px-30 md:px-20 sm:px-10 px-10 pb-6  mx-auto" style={{backgroundColor: "#FBFBFA"}}>
             <h2 className={`px-10 font-bold text-gray-900 text-center py-10 ${lora.className}`} style={{ fontSize: '34px' }}>
@@ -64,7 +27,7 @@ export default function CurrentJobs() {
             </h2>
             
             <div className="flex flex-col md:flex-row gap-6 md:gap-4 lg:gap-6 justify-center items-stretch px-4 md:px-8">
-                {jobData.map((job, index) => (
+                {JobData.map((job, index) => (
                     <div key={index} className="bg-green-100 rounded-lg p-6 flex flex-col flex-1 max-w-sm mx-auto md:max-w-none">
                         <h3 className={`font-medium text-gray-900 mb-4 ${notoSans.className}`} style={{ fontSize: '24px' }}>
                             {job.title}

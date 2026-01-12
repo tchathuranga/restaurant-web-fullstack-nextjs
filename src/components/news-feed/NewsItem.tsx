@@ -66,7 +66,11 @@ const NewsItem = ({
           <p 
             className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 ${notoSans.className}`}
           >
-            {description}
+            {description
+              .split(/\r?\n|\.\s+/)
+              .filter(line => line.trim() !== '')
+              .slice(0, 1)
+              .join('. ') + (description.split(/\r?\n|\.\s+/).filter(line => line.trim() !== '').length > 3 ? '...' : '')}
           </p>
 
           {/* See More Link */}
