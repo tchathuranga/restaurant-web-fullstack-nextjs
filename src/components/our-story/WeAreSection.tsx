@@ -30,7 +30,7 @@ const WeAreSection = () => {
                     </div>
 
                     {/* Right Column - Text Content */}
-                    <div className="w-full lg:w-3/5 flex flex-col">
+                    <div className="w-full lg:w-3/5 flex flex-col lg:pt-10">
                         <h2
                             className={` font-bold text-gray-900  py-6 ${lora.className}`} style={{ fontSize: '34px' }}
                         >
@@ -50,20 +50,6 @@ const WeAreSection = () => {
                                 You may know us as Shanti Vihar from before. We are committed to serving authentic Indian cuisine while maintaining the highest standards of quality and service.
                             </p>
 
-                        </div>
-
-                        {/* Special Friday Night Buffet CTA */}
-                        <div className="bg-[#AE242F] rounded-lg p-2 md:p-4 text-white shadow-lg">
-                            <div className="flex items-start justify-between gap-4">
-                                <div className="flex-1">
-                                    <h3 className={`text-lg md:text-lg font-medium mb-3 ${notoSans.className}`}>
-                                        Special Friday Night Buffet!
-                                    </h3>
-                                    <p className={`text-base md:text-sm leading-relaxed ${notoSans.className}`}>
-                                        Join us every Friday night for our special buffet, where you can experience a wide variety of our signature dishes.
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

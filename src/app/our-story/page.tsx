@@ -2,11 +2,11 @@
 
 import Banner from "@/components/common/Banner";
 import WeAreSection from "@/components/our-story/WeAreSection";
-import OurSpecialtiesSection from "@/components/our-story/OurSpecialtiesSection";
 import OurLocationsSection from "@/components/our-story/OurLocationsSection";
 import GallerySection from "@/components/our-story/GallerySection";
 import { Lora, Noto_Sans } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
+import {GALLERY_IMAGES} from "@/const/gallery";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -42,10 +42,12 @@ export default function OurStory() {
       <SlideUpSection>
         <OurLocationsSection />
       </SlideUpSection>
-      
-      <SlideUpSection>
-        <GallerySection />
-      </SlideUpSection>
+
+      {GALLERY_IMAGES.length > 0 && (
+        <SlideUpSection>
+          <GallerySection galleryImages={GALLERY_IMAGES} />
+        </SlideUpSection>
+      )}
     </div>
   );
 }

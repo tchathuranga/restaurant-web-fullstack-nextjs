@@ -6,11 +6,10 @@ import { Noto_Sans } from "next/font/google";
 import {
   Phone,
   Mail,
-  Instagram,
   Facebook,
-  Twitter,
   MapPin,
 } from "lucide-react";
+import Link from "next/link";
 
 const notoSans = Noto_Sans({
   weight: ["300", "400", "500", "600", "700"],
@@ -64,31 +63,37 @@ export default function Footer() {
               <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
                 <Phone className="w-3 h-3 text-white/90" strokeWidth={2} />
               </div>
-              <span className={`${notoSans.className} text-white/90`}>
+              <a
+                href="tel:+941123456789"
+                className={`text-white/80 ${notoSans.className}`}
+              >
                 +94 11 2345 6789
-              </span>
+              </a>
             </div>
             <div className="flex items-center gap-2.5 text-xs justify-start w-full">
               <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
                 <Mail className="w-3 h-3 text-white/90" strokeWidth={2} />
               </div>
-              <span className={`${notoSans.className} text-white/90`}>
-                info@srivhar.lk
-              </span>
+              <a
+                href="mailto:info@srivihar.lk"
+                className={`text-white/80 ${notoSans.className}`}
+              >
+                info@srivihar.lk
+              </a>
             </div>
           </div>
 
           {/* Social Icons - Enhanced */}
           <div className="flex gap-5 justify-center">
-            <a
+            {/* <a
               href="#"
               className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:bg-white/20 hover:border-white/60 transition-all duration-200"
             >
               <Instagram className="w-4 h-4" strokeWidth={2.5} />
-            </a>
+            </a> */}
 
             <a
-              href="#"
+              href="https://www.facebook.com/share/1DsUBgNnQk/"
               className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:bg-white/20 hover:border-white/60 transition-all duration-200"
             >
               <Facebook
@@ -98,7 +103,7 @@ export default function Footer() {
               />
             </a>
 
-            <a
+            {/* <a
               href="#"
               className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:bg-white/20 hover:border-white/60 transition-all duration-200"
             >
@@ -107,7 +112,7 @@ export default function Footer() {
                 strokeWidth={1.5}
                 fill="currentColor"
               />
-            </a>
+            </a> */}
           </div>
         </div>
 
@@ -177,16 +182,22 @@ export default function Footer() {
             Order Now
           </h4>
           <div className="flex gap-5 items-center justify-center">
-            <div className="rounded-lg p-3 bg-white/15  transition-colors">
-              <Image
-                src="/images/icons/uber.png"
-                alt="Uber Eats"
-                width={56}
-                height={36}
-                className="object-contain hover:opacity-80 transition-opacity"
-              />
-            </div>
-            <div className="rounded-lg p-3 bg-white/15  transition-colors">
+            <Link
+              href="https://shorturl.at/MAj5h"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="rounded-lg p-3 bg-white/15 transition-colors cursor-pointer hover:bg-white/20">
+                <Image
+                  src="/images/icons/uber.png"
+                  alt="Uber Eats"
+                  width={56}
+                  height={36}
+                  className="object-contain hover:opacity-80 transition-opacity"
+                />
+              </div>
+            </Link>
+            {/* <div className="rounded-lg p-3 bg-white/15  transition-colors">
               <Image
                 src="/images/icons/pickme.png"
                 alt="Pick Me"
@@ -194,7 +205,7 @@ export default function Footer() {
                 height={36}
                 className="object-contain hover:opacity-80 transition-opacity"
               />
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -221,23 +232,33 @@ export default function Footer() {
                   strokeWidth={1.5}
                   fill="currentColor"
                 />
-                <span className={notoSans.className}>+94 11 2345 6789</span>
+                <a
+                  href="tel:+941123456789"
+                  className={`text-white/80 ${notoSans.className}`}
+                >
+                  +94 11 2345 6789
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-white/80 flex-shrink-0" />
-                <span className={notoSans.className}>info@srivhar.lk</span>
+                <a
+                  href="mailto:info@srivihar.lk"
+                  className={`text-white/80 ${notoSans.className}`}
+                >
+                  info@srivihar.lk
+                </a>
               </div>
             </div>
 
             <div className="flex gap-3 mt-2">
-              <a
+              {/* <a
                 href="#"
                 className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
               >
                 <Instagram className="w-4 h-4" strokeWidth={2.5} />
-              </a>
+              </a> */}
               <a
-                href="#"
+                href="https://www.facebook.com/share/1DsUBgNnQk/"
                 className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
               >
                 <Facebook
@@ -246,7 +267,7 @@ export default function Footer() {
                   fill="currentColor"
                 />
               </a>
-              <a
+              {/* <a
                 href="#"
                 className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
               >
@@ -255,7 +276,7 @@ export default function Footer() {
                   strokeWidth={1.5}
                   fill="currentColor"
                 />
-              </a>
+              </a> */}
             </div>
           </div>
 
@@ -363,16 +384,22 @@ export default function Footer() {
               Order Now
             </h4>
             <div className="flex gap-2 items-center">
-              <div className="rounded-lg p-3 bg-white/15  transition-colors">
-                <Image
-                  src="/images/icons/uber.png"
-                  alt="Uber Eats"
-                  width={36}
-                  height={36}
-                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain hover:opacity-80 transition-opacity"
-                />
-              </div>
-              <div className="rounded-lg p-3 bg-white/15  transition-colors">
+              <Link
+                href="https://shorturl.at/MAj5h"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="rounded-lg p-3 bg-white/15 transition-colors cursor-pointer hover:bg-white/20">
+                  <Image
+                    src="/images/icons/uber.png"
+                    alt="Uber Eats"
+                    width={56}
+                    height={36}
+                    className="object-contain hover:opacity-80 transition-opacity"
+                  />
+                </div>
+              </Link>
+              {/* <div className="rounded-lg p-3 bg-white/15  transition-colors">
                 <Image
                   src="/images/icons/pickme.png"
                   alt="Pick Me"
@@ -380,7 +407,7 @@ export default function Footer() {
                   height={36}
                   className="w-8 h-8 sm:w-10 sm:h-10 object-contain hover:opacity-80 transition-opacity"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Banner from "@/components/common/Banner";
 import ApplyJob from "@/components/join-the-team/ApplyJob"
 import WhyJoinUs from "@/components/join-the-team/WhyJoinUs";
+import { jobData } from "@/const/jobData";
 
 const lora = Lora({
     weight: ['400', '500', '600', '700'],
@@ -16,66 +17,9 @@ const notoSans = Noto_Sans({
 });
 
 async function getJobData(id: string) {
-    // In a real app, you'd fetch from an API or database
-    const jobData = [
-        {
-            id: 1,
-            title: "South Indian Cook",
-            location: "Colombo 5, Sri Lanka",
-            employmentType: "Full-Time",
-            introText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            roleDescription: [
-                "Plan and execute engaging cooking demonstrations that highlight product features and benefits.",
-                "Develop new recipes and menu concepts that are versatile, easy to replicate, and visually appealing.",
-                "Create an inviting atmosphere during demonstrations, answering questions, and fostering positive interactions.",
-                "Work closely with sales and marketing teams to ensure cohesive and effective product promotions.",
-                "Mentor junior culinary staff, providing training on presentation techniques and customer engagement strategies."
-            ],
-            qualifications: [
-                "6-8 years in a senior chef role or similar position in sales/business development, with a preference for instructional and kitchen demonstration experience.",
-                "Advanced Diploma or Diploma in Culinary Management / Hospitality Management, and a recognized Diploma or NVQ 4 in Commercial Cookery.",
-                "Strong communication, decision-making ability, leadership skills, and the ability to work on multiple discipline projects.",
-                "Exceptional culinary skills, teamwork, organizational, and interpersonal abilities."
-            ]
-        },
-        {
-            id: 2,
-            title: "South Indian Cook",
-            location: "Colombo 5, Sri Lanka",
-            employmentType: "Full-Time",
-            introText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            roleDescription: [
-                "Plan and execute engaging cooking demonstrations that highlight product features and benefits.",
-                "Develop new recipes and menu concepts that are versatile, easy to replicate, and visually appealing.",
-                "Create an inviting atmosphere during demonstrations, answering questions, and fostering positive interactions."
-            ],
-            qualifications: [
-                "6-8 years in a senior chef role or similar position in sales/business development.",
-                "Advanced Diploma or Diploma in Culinary Management / Hospitality Management.",
-                "Strong communication, decision-making ability, and leadership skills."
-            ]
-        },
-        {
-            id: 3,
-            title: "South Indian Cook",
-            location: "Colombo 5, Sri Lanka",
-            employmentType: "Full-Time",
-            introText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            roleDescription: [
-                "Plan and execute engaging cooking demonstrations that highlight product features and benefits.",
-                "Develop new recipes and menu concepts that are versatile, easy to replicate, and visually appealing."
-            ],
-            qualifications: [
-                "6-8 years in a senior chef role or similar position in sales/business development.",
-                "Advanced Diploma or Diploma in Culinary Management / Hospitality Management."
-            ]
-        }
-    ];
-
     return jobData.find(job => job.id === parseInt(id)) || null;
 }
 
-// In Next.js App Router, params are passed as props
 interface PageProps {
     params: Promise<{
         id: string;
@@ -83,7 +27,6 @@ interface PageProps {
 }
 
 export default async function JobDetailPage({ params }: PageProps) {
-    // Await params in Next.js 15+
     const { id } = await params;
     const job = await getJobData(id);
 
@@ -148,22 +91,22 @@ export default async function JobDetailPage({ params }: PageProps) {
                     </div>
 
                     {/* Introductory Text */}
-                    {job.introText && (
+                    {job.description && (
                         <div className="mb-8">
                             <p className={`text-gray-700 leading-relaxed ${notoSans.className} text-base`}>
-                                {job.introText}
+                                {job.description}
                             </p>
                         </div>
                     )}
 
-                    {/* Role Description Section */}
-                    {job.roleDescription && job.roleDescription.length > 0 && (
+                    {/* Requirements Section */}
+                    {job.requirements && job.requirements.length > 0 && (
                         <div className="mb-8">
                             <h2 className={`text-xl font-bold text-gray-900 mb-4 ${notoSans.className}`}>
-                                Role Description:
+                                Requirements
                             </h2>
                             <ul className={`space-y-3 ${notoSans.className}`}>
-                                {job.roleDescription.map((item, index) => (
+                                {job.requirements.map((item, index) => (
                                     <li key={index} className="text-gray-700 flex items-start text-base leading-relaxed">
                                         <span className="mr-3 mt-1">•</span>
                                         <span>{item}</span>
@@ -192,7 +135,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                 </div>
             </div>
 
-            <ApplyJob />
+            <ApplyJob jobTitle={job.title} />
             <WhyJoinUs />
         </div>
     );

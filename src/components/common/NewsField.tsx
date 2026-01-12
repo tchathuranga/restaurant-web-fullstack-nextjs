@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { Noto_Sans, Lora } from 'next/font/google';
+import NewsDialog from '../news-feed/NewsDialog';
+import { useState } from 'react';
 
 const notoSans = Noto_Sans({
   weight: ['300', '400', '500', '600', '700'],
@@ -15,22 +17,25 @@ interface NewsFieldProps {
   image: string;
   title: string;
   description: string;
-  seeMoreLink: string;
   imageAlt?: string;
 }
 
-const NewsField = ({ 
-  image, 
-  title, 
-  description, 
-  seeMoreLink, 
-  imageAlt 
-}: NewsFieldProps) => {
+const NewsField = ({ image, title, description, imageAlt }: NewsFieldProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
+  const handleSeeMore = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
-    <div className="lg:px-30 md:px-20 sm:px-30 pt-20">
-      <div className="flex flex-col md:flex-row overflow-hidden duration-300">
+    <div className="px-6 sm:px-6 md:px-12 lg:px-24 pt-8 sm:pt-12 md:pt-16 lg:pt-20">
+      <div className="flex flex-col md:flex-row overflow-hidden duration-300 gap-4 md:gap-0">
         {/* Left side - Image */}
-        <div className="w-full md:w-1/2 lg:w-2/5 relative p-2 md:p-4">
+        <div className="w-full md:w-1/2 lg:w-2/5 relative p-1 sm:p-2 md:p-4">
           <div className="aspect-[4/3] relative rounded-lg overflow-hidden">
             <Image
               src={image}
@@ -43,7 +48,7 @@ const NewsField = ({
         </div>
 
         {/* Right side - Content */}
-        <div className="w-full md:w-1/2 lg:w-3/5 relative p-2 md:p-4 md:ml-10 mt-4 md:mt-0 lg:mt-15">
+        <div className="w-full md:w-1/2 lg:w-3/5 relative p-1 sm:p-2 md:p-4 md:ml-6 lg:ml-10 mt-4 md:mt-0 lg:mt-12">
           <div>
             {/* Title */}
             <h3 
@@ -63,8 +68,8 @@ const NewsField = ({
           {/* See More Link */}
           <div className="mt-auto">
             <a
-              href={seeMoreLink}
               className={`inline-flex items-center text-[#F67A08] hover:text-[#E5690A] font-medium text-sm md:text-base transition-colors duration-200 group ${notoSans.className}`}
+              onClick={handleSeeMore}
             >
               See More
               <svg 
@@ -79,6 +84,15 @@ const NewsField = ({
           </div>
         </div>
       </div>
+
+      <NewsDialog
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        image={image}
+        title={title}
+        description={description}
+        imageAlt={imageAlt}
+      />
     </div>
   );
 };

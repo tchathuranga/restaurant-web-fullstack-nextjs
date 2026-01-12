@@ -5,6 +5,7 @@ import { Lora, Noto_Sans } from "next/font/google";
 import Branches from "@/components/contact-us/Branches";
 import SendMessage from "@/components/contact-us/SendMessage";
 import SlideUpSection from "@/components/common/SlideUpSection";
+import BookingAndInquiries from "@/components/outdoor-catering/BookingAndInquiries";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -35,7 +36,13 @@ export default function ContactUs() {
       </SlideUpSection>
       
       <SlideUpSection>
-        <SendMessage />
+        <div id="send-message">
+          <SendMessage />
+        </div>
+      </SlideUpSection>
+
+      <SlideUpSection>
+        <BookingAndInquiries />
       </SlideUpSection>
     </div>
   );
