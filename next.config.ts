@@ -5,9 +5,24 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [],
   },
-  // Reduce build memory usage
   swcMinify: true,
   productionBrowserSourceMaps: false,
+  webpack: (config, { isServer }) => {
+    // Optimize webpack bundle to reduce memory usage
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+          },
+        },
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
