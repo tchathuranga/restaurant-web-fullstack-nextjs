@@ -10,13 +10,21 @@ export async function POST(request: NextRequest) {
         const message = formData.get("message") as string;
 
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || "smtp.gmail.com",
-            port: Number(process.env.SMTP_PORT) || 465,
-            secure: true,
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: Number(process.env.SMTP_PORT) === 465,
             auth: {
-                user: process.env.SMTP_USER || "infosrivihar@gmail.com",
-                pass: process.env.SMTP_PASS || "oaxv igxb cfxj xqze",
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             },
+        });
+
+        // Log environment check
+        console.log("[Email Debug] SMTP Config:", {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            user: process.env.SMTP_USER ? "***" : "NOT SET",
+            sendTo: process.env.SEND_EMAIL_TO,
         });
 
         const htmlContent = `
@@ -31,18 +39,26 @@ export async function POST(request: NextRequest) {
             </div>
         `;
 
-        await transporter.sendMail({
-            from: process.env.SMTP_FROM || "infosrivihar@gmail.com",
-            to: process.env.SEND_EMAIL_TO || "thisarachathuranga000@gmail.com",
+        await transporter.verify();
+        console.log("[Email Debug] SMTP connection verified");
+
+        const info = await transporter.sendMail({
+            from: process.env.SMTP_FROM || process.env.SMTP_USER,
+            to: process.env.SEND_EMAIL_TO,
             subject: `Customer message: - ${name}`,
             html: htmlContent
         });
 
-        return NextResponse.json({ success: true, message: "Message sent successfully" });
+        console.log("[Email Debug] Email sent successfully:", info.messageId);
+        return NextResponse.json({ success: true, message: "Message sent successfully", messageId: info.messageId });
     } catch (error) {
-        console.error("Error sending email:", error);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error("[Email Error] Failed to send customer message:", {
+            message: errorMessage,
+            error: error,
+        });
         return NextResponse.json(
-            { error: "Failed to send application" },
+            { error: "Failed to send message", details: errorMessage },
             { status: 500 }
         );
     }
