@@ -1,31 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export async function POST(request: NextRequest) {
     try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        
         const formData = await request.formData();
         const name = formData.get("name") as string;
         const email = formData.get("email") as string;
         const subject = formData.get("subject") as string;
         const message = formData.get("message") as string;
 
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT),
-            secure: Number(process.env.SMTP_PORT) === 465,
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
-            },
-        });
+        // Validate required fields
+        if (!name || !email || !subject || !message) {
+            return NextResponse.json(
+                { error: "Missing required fields" },
+                { status: 400 }
+            );
+        }
 
-        // Log environment check
-        console.log("[Email Debug] SMTP Config:", {
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
-            user: process.env.SMTP_USER ? "***" : "NOT SET",
-            sendTo: process.env.SEND_EMAIL_TO,
-        });
+        // Log request
+        console.log("[Email Debug] Sending customer message from:", email);
 
         const htmlContent = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -39,18 +34,23 @@ export async function POST(request: NextRequest) {
             </div>
         `;
 
-        await transporter.verify();
-        console.log("[Email Debug] SMTP connection verified");
-
-        const info = await transporter.sendMail({
-            from: process.env.SMTP_FROM || process.env.SMTP_USER,
-            to: process.env.SEND_EMAIL_TO,
+        const result = await resend.emails.send({
+            from: process.env.RESEND_FROM || "noreply@srivihar.com",
+            to: process.env.SEND_EMAIL_TO || "thisarachathuranga000@gmail.com",
             subject: `Customer message: - ${name}`,
             html: htmlContent
         });
 
-        console.log("[Email Debug] Email sent successfully:", info.messageId);
-        return NextResponse.json({ success: true, message: "Message sent successfully", messageId: info.messageId });
+        if (result.error) {
+            console.error("[Email Error] Resend API error:", result.error);
+            return NextResponse.json(
+                { error: "Failed to send message", details: result.error.message },
+                { status: 500 }
+            );
+        }
+
+        console.log("[Email Debug] Email sent successfully:", result.data?.id);
+        return NextResponse.json({ success: true, message: "Message sent successfully", messageId: result.data?.id });
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         console.error("[Email Error] Failed to send customer message:", {
