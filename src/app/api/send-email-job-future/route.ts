@@ -25,11 +25,19 @@ export async function POST(request: NextRequest) {
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT),
-            secure: true,
+            secure: Number(process.env.SMTP_PORT) === 465,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS,
             },
+        });
+
+        // Log environment check
+        console.log("[Email Debug] SMTP Config for Future Job Application:", {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            user: process.env.SMTP_USER ? "***" : "NOT SET",
+            sendTo: process.env.SEND_EMAIL_TO,
         });
 
         // HTML email template
@@ -48,7 +56,10 @@ export async function POST(request: NextRequest) {
         `;
 
         // Send email
-        await transporter.sendMail({
+        await transporter.verify();
+        console.log("[Email Debug] SMTP connection verified");
+
+        const info = await transporter.sendMail({
             from: process.env.SMTP_FROM || process.env.SMTP_USER,
             to: process.env.SEND_EMAIL_TO,
             subject: `New Job Application to the Sri Vihar talent pool - ${name}`,
@@ -61,11 +72,16 @@ export async function POST(request: NextRequest) {
             ],
         });
 
-        return NextResponse.json({ success: true, message: "Application sent successfully" });
+        console.log("[Email Debug] Future job application email sent successfully:", info.messageId);
+        return NextResponse.json({ success: true, message: "Application sent successfully", messageId: info.messageId });
     } catch (error) {
-        console.error("Error sending email:", error);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error("[Email Error] Failed to send future job application:", {
+            message: errorMessage,
+            error: error,
+        });
         return NextResponse.json(
-            { error: "Failed to send application" },
+            { error: "Failed to send application", details: errorMessage },
             { status: 500 }
         );
     }
