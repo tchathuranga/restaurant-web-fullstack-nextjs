@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
         // Send email with attachment
         const result = await resend.emails.send({
-            from: process.env.RESEND_FROM || "noreply@srivihar.com",
+            from: "onboarding@resend.dev",
             to: process.env.SEND_EMAIL_TO || "thisarachathuranga000@gmail.com",
             subject: `New Job Application to the Sri Vihar talent pool - ${name}`,
             html: htmlContent,

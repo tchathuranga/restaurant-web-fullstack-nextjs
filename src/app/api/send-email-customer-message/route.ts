@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         `;
 
         const result = await resend.emails.send({
-            from: process.env.RESEND_FROM || "noreply@srivihar.com",
+            from: "onboarding@resend.dev",
             to: process.env.SEND_EMAIL_TO || "thisarachathuranga000@gmail.com",
             subject: `Customer message: - ${name}`,
             html: htmlContent
