@@ -1,6 +1,7 @@
 import { ItemDataProps } from "../../interfaces/dishes";
 import { Lora  } from 'next/font/google';
 import ItemContainer from "../common/ItemContainer";
+import { ItemProps } from "@/interfaces/Items";
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -9,7 +10,7 @@ const lora = Lora({
 
 interface DishesProps {
   title: string;
-  itemsData: ItemDataProps[];
+  itemsData: ItemProps[];
 }
 
 export default function Dishes({ title, itemsData }: DishesProps) {

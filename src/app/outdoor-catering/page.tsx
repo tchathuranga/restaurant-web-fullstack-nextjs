@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Banner from "@/components/common/Banner";
 import { Lora, Noto_Sans } from "next/font/google";
 import { Check } from "lucide-react";

@@ -6,7 +6,9 @@ import CurrentJobs from "@/components/join-the-team/CurrentJobs";
 import FutureJobs from "@/components/join-the-team/FutureJobs";
 import WhyJoinUs from "@/components/join-the-team/WhyJoinUs";
 import SlideUpSection from "@/components/common/SlideUpSection";
-import { jobData } from "@/const/jobData";
+import { useEffect, useState } from "react";
+import { VacancyProps } from "@/interfaces/vacancy";
+import { getAllVacancies } from "@/services/vacancyService";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -19,6 +21,26 @@ const notoSans = Noto_Sans({
 });
 
 export default function JoinTheTeam() {
+  const [vacancyData, setVacancyData] = useState<VacancyProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchVacancies = async () => {
+      setLoading(true);
+      setError("");
+      const response = await getAllVacancies();
+      if (response.success && response.data) {
+        setVacancyData(response.data);
+      } else {
+        setError(response.error || "Failed to load vacancies");
+      }
+      setLoading(false);
+    };
+
+    fetchVacancies();
+  }, []);
+
   return (
     <div>
       <Banner
@@ -32,9 +54,15 @@ export default function JoinTheTeam() {
         }}
       />
 
-      {jobData.length > 0 && (
+      {loading && (
+        <div className="p-8 min-w-125">
+          <p>Loading vacancy details...</p>
+        </div>
+      )}
+
+      {vacancyData.length > 0 && (
         <SlideUpSection>
-          <CurrentJobs JobData={jobData} />
+          <CurrentJobs JobData={vacancyData} />
         </SlideUpSection>
       )}
 

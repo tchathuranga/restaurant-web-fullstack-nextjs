@@ -51,18 +51,17 @@ const NewsField = ({ image, title, description, imageAlt }: NewsFieldProps) => {
         <div className="w-full md:w-1/2 lg:w-3/5 relative p-1 sm:p-2 md:p-4 md:ml-6 lg:ml-10 mt-4 md:mt-0 lg:mt-12">
           <div>
             {/* Title */}
-            <h3 
+            <h3
               className={`text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 line-clamp-2 ${lora.className}`}
             >
               {title}
             </h3>
 
             {/* Description */}
-            <p 
-              className={`text-gray-600 text-sm md:text-base leading-relaxed mb-3 md:mb-4 line-clamp-3 ${notoSans.className}`}
-            >
-              {description}
-            </p>
+            <div
+              className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 line-clamp-3 ${notoSans.className}`}
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </div>
 
           {/* See More Link */}
@@ -72,13 +71,18 @@ const NewsField = ({ image, title, description, imageAlt }: NewsFieldProps) => {
               onClick={handleSeeMore}
             >
               See More
-              <svg 
-                className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </a>
           </div>

@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Lora, Noto_Sans } from "next/font/google";
 import { ITEM_DATA } from "@/const/dishes";
 import ItemContainer from "../common/ItemContainer";
+import { fetchAllItems } from "@/services/ItemService";
+import { ItemProps } from "@/interfaces/Items";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -17,12 +19,36 @@ const notoSans = Noto_Sans({
 
 export default function CateringMenu() {
   const [selectedDish, setSelectedDish] = useState(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+  const [ItemData, setItemData] = useState<ItemProps[]>([]);
 
   const dishes = ["North Indian", "South Indian", "Sweets"];
 
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        const result = await fetchAllItems();
+        if (result.success) {
+          setItemData(result.data || []);
+        } else {
+          setError(result.error || "Failed to fetch items");
+        }
+      } catch (err: any) {
+        setError(err.message || "Failed to fetch items");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
   // Filter items by selected category
-  const filteredItems = ITEM_DATA.filter(
-    (item) => item.category === dishes[selectedDish]
+  const filteredItems = ItemData.filter(
+    (item) => item.category === dishes[selectedDish],
   );
 
   return (
@@ -35,6 +61,16 @@ export default function CateringMenu() {
       </h2>
 
       <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-10">
+        {error && (
+          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
+            <p className="text-red-600 text-lg">{error}</p>
+          </div>
+        )}
+        {loading && (
+          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
+            <p className="text-red-600 text-lg">Loading Items</p>
+          </div>
+        )}
         {dishes.map((dish, index) => (
           <button
             key={dish}

@@ -5,6 +5,9 @@ import WhatsNewSection from "@/components/news-feed/WhatsNewSection";
 import { Lora, Noto_Sans } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
 import { newsItems } from "@/const/news";
+import { useEffect, useState } from "react";
+import { NewsProps } from "@/interfaces/news";
+import { getAllNews } from "@/services/newsService";
 
 const lora = Lora({
   weight: ['400', '500', '600', '700'],
@@ -17,6 +20,33 @@ const notoSans = Noto_Sans({
 });
 
 export default function NewsFeed() {
+    const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(true);
+    const [newsData, setNewsData] = useState<NewsProps[]>([]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            setLoading(true);
+            setError("");
+
+            const result = await getAllNews();
+            if (result.success) {
+              setNewsData(result.data || []);
+            } else {
+              setError(result.error || "Failed to fetch News");
+              setLoading(false);
+            }
+          } catch (err: any) {
+            setError(err.message || "Failed to fetch News");
+          } finally {
+            setLoading(false);
+          }
+        };
+
+        fetchData();
+      }, []);
+
 
     return (
         <div>
@@ -31,7 +61,7 @@ export default function NewsFeed() {
                 }}
             />
             <SlideUpSection> 
-                <WhatsNewSection newsItems={newsItems} />
+                <WhatsNewSection newsItems={newsData} error={error} loading={loading} />
             </SlideUpSection>
         </div>
     )

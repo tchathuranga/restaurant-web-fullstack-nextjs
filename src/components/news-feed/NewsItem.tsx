@@ -56,22 +56,17 @@ const NewsItem = ({
         {/* Right side - Content */}
         <div className="w-full md:w-1/2 lg:w-3/5 flex flex-col py-10 justify-center md:justify-start">
           {/* Title */}
-          <h3 
+          <h3
             className={`text-xl sm:text-2xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 ${lora.className}`}
           >
             {title}
           </h3>
 
           {/* Description */}
-          <p 
-            className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 ${notoSans.className}`}
-          >
-            {description
-              .split(/\r?\n|\.\s+/)
-              .filter(line => line.trim() !== '')
-              .slice(0, 1)
-              .join('. ') + (description.split(/\r?\n|\.\s+/).filter(line => line.trim() !== '').length > 3 ? '...' : '')}
-          </p>
+          <div
+            className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 line-clamp-3 ${notoSans.className}`}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
 
           {/* See More Link */}
           <div>
@@ -80,13 +75,18 @@ const NewsItem = ({
               className={`inline-flex items-center text-[#F67A08] hover:text-[#E5690A] font-medium text-sm md:text-base transition-colors duration-200 group cursor-pointer ${notoSans.className}`}
             >
               see more...
-              <svg 
-                className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>

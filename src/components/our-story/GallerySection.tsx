@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Noto_Sans, Lora } from 'next/font/google';
-import { GalleryImage } from '@/interfaces/gallery';
+import { GalleryImage, IGallery } from '@/interfaces/gallery';
 
 const notoSans = Noto_Sans({
   weight: ['300', '400', '500', '600', '700'],
@@ -14,7 +14,7 @@ const lora = Lora({
 });
 
 interface GallerySectionProps {
-  galleryImages: GalleryImage[];
+  galleryImages: IGallery[];
 }
 
 const GallerySection = ({ galleryImages }: GallerySectionProps) => {
@@ -39,8 +39,8 @@ const GallerySection = ({ galleryImages }: GallerySectionProps) => {
               className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={image.image}
+                alt={image.image}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 33vw"
