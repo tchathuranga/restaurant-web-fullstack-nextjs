@@ -1,39 +1,63 @@
 "use client";
 
-import React, { useCallback, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
-import { NAVIGATION_LINKS, FOOD_MENU_ITEMS, OPENING_HOURS } from '@/const/headerContens';
-import { newsItems } from '@/const/news';
+import React, { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  NAVIGATION_LINKS,
+  FOOD_MENU_ITEMS,
+  OPENING_HOURS,
+} from "@/const/headerContens";
+import { newsItems } from "@/const/news";
+import { getAllNews } from "@/services/newsService";
+import { NewsProps } from "@/interfaces/news";
 
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [showOpeningHours, setShowOpeningHours] = useState(false);
   const [showFoodMenu, setShowFoodMenu] = useState(false);
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [newsData, setNewsData] = useState<NewsProps[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getAllNews();
+        if (result.success) {
+          setNewsData(result.data || []);
+        } else {
+          console.log("Failed to fetch News");
+        }
+      } catch (err: any) {
+        console.log("Failed to fetch News");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFoodMenuItemClick = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement>, dishName: string) => {
       event.preventDefault();
 
       const encodedCategory = encodeURIComponent(dishName);
-      setActiveLink('Food Menu');
+      setActiveLink("Food Menu");
       setShowFoodMenu(false);
       setShowMobileMenu(false);
 
-      if (pathname === '/food-menu') {
+      if (pathname === "/food-menu") {
         window.dispatchEvent(
-          new CustomEvent('food-menu-select', { detail: dishName })
+          new CustomEvent("food-menu-select", { detail: dishName }),
         );
       } else {
         router.push(`/food-menu?category=${encodedCategory}`);
       }
     },
-    [pathname, router]
+    [pathname, router],
   );
 
   return (
@@ -64,10 +88,20 @@ const Header = () => {
               onClick={() => setShowOpeningHours(!showOpeningHours)}
               onMouseEnter={() => setShowOpeningHours(!showOpeningHours)}
               className="flex items-center space-x-2 px-4 py-2 text-sm font-medium bg-white border-2 border-[#F67A08] text-[#F67A08] hover:bg-gray-50 rounded-md transition-colors"
-              style={{ borderColor: '#F67A08', color: '#F67A08' }}
+              style={{ borderColor: "#F67A08", color: "#F67A08" }}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span>Find out our opening hours</span>
             </button>
@@ -76,7 +110,9 @@ const Header = () => {
             {showOpeningHours && (
               <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">Opening Hours</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    Opening Hours
+                  </h3>
                   {OPENING_HOURS.map((hours, index) => (
                     <p key={index} className="text-sm text-gray-600 mb-1">
                       {hours}
@@ -92,11 +128,11 @@ const Header = () => {
             {/* Home Link */}
             <Link
               href="/"
-              onClick={() => setActiveLink('Home')}
+              onClick={() => setActiveLink("Home")}
               className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                activeLink === 'Home' 
-                  ? 'text-[#F67A08]' 
-                  : 'text-gray-700 hover:text-[#F67A08]'
+                activeLink === "Home"
+                  ? "text-[#F67A08]"
+                  : "text-gray-700 hover:text-[#F67A08]"
               }`}
             >
               Home
@@ -107,12 +143,12 @@ const Header = () => {
               <div className="flex items-center">
                 <Link
                   href="/food-menu"
-                  onClick={() => setActiveLink('Food Menu')}
+                  onClick={() => setActiveLink("Food Menu")}
                   onMouseEnter={() => setShowFoodMenu(!showFoodMenu)}
                   className={`text-sm font-medium transition-colors ${
-                    activeLink === 'Food Menu' 
-                      ? 'text-[#F67A08]' 
-                      : 'text-gray-700 hover:text-[#F67A08]'
+                    activeLink === "Food Menu"
+                      ? "text-[#F67A08]"
+                      : "text-gray-700 hover:text-[#F67A08]"
                   }`}
                 >
                   Food Menu
@@ -121,8 +157,18 @@ const Header = () => {
                   onClick={() => setShowFoodMenu(!showFoodMenu)}
                   className="ml-1 text-gray-700 hover:text-[#F67A08] transition-colors"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
               </div>
@@ -133,7 +179,7 @@ const Header = () => {
                   <div className="py-2">
                     {FOOD_MENU_ITEMS.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
-                        item.name
+                        item.name,
                       )}`;
                       return (
                         <Link
@@ -156,16 +202,17 @@ const Header = () => {
             {/* Other Navigation Links */}
             {NAVIGATION_LINKS.filter(
               (link) =>
-                link.name !== 'News Feed' || (link.name === 'News Feed' && newsItems.length > 0)
+                link.name !== "News Feed" ||
+                (link.name === "News Feed" && newsData.length > 0),
             ).map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setActiveLink(link.name)}
                 className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                  activeLink === link.name 
-                    ? 'text-[#F67A08]' 
-                    : 'text-gray-700 hover:text-[#F67A08]'
+                  activeLink === link.name
+                    ? "text-[#F67A08]"
+                    : "text-gray-700 hover:text-[#F67A08]"
                 }`}
               >
                 {link.name}
@@ -181,10 +228,20 @@ const Header = () => {
             <button
               onClick={() => setShowOpeningHours(!showOpeningHours)}
               className="flex items-center space-x-2 px-3 py-2 text-xs font-medium bg-white border-2 border-[#F67A08] text-[#F67A08] hover:bg-gray-50 rounded-md transition-colors"
-              style={{ borderColor: '#F67A08', color: '#F67A08' }}
+              style={{ borderColor: "#F67A08", color: "#F67A08" }}
             >
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-3 h-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span>Hours</span>
             </button>
@@ -193,7 +250,9 @@ const Header = () => {
             {showOpeningHours && (
               <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">Opening Hours</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    Opening Hours
+                  </h3>
                   {OPENING_HOURS.map((hours, index) => (
                     <p key={index} className="text-sm text-gray-600 mb-1">
                       {hours}
@@ -222,13 +281,13 @@ const Header = () => {
                 href="/"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setActiveLink('Home');
+                  setActiveLink("Home");
                   setShowMobileMenu(false);
                 }}
                 className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                  activeLink === 'Home' 
-                    ? 'text-[#F67A08]' 
-                    : 'text-gray-700 hover:text-[#F67A08]'
+                  activeLink === "Home"
+                    ? "text-[#F67A08]"
+                    : "text-gray-700 hover:text-[#F67A08]"
                 }`}
               >
                 Home
@@ -241,13 +300,13 @@ const Header = () => {
                     href="/food-menu"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setActiveLink('Food Menu');
+                      setActiveLink("Food Menu");
                       setShowMobileMenu(false);
                     }}
                     className={`text-sm font-medium transition-colors ${
-                      activeLink === 'Food Menu' 
-                        ? 'text-[#F67A08]' 
-                        : 'text-gray-700 hover:text-[#F67A08]'
+                      activeLink === "Food Menu"
+                        ? "text-[#F67A08]"
+                        : "text-gray-700 hover:text-[#F67A08]"
                     }`}
                   >
                     Food Menu
@@ -259,18 +318,28 @@ const Header = () => {
                     }}
                     className="p-1 text-gray-700 hover:text-[#F67A08] transition-colors"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
                 </div>
-                
+
                 {/* Food Menu Dropdown in Mobile */}
                 {showFoodMenu && (
                   <div className="bg-gray-50 border-t border-gray-200">
                     {FOOD_MENU_ITEMS.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
-                        item.name
+                        item.name,
                       )}`;
                       return (
                         <Link
@@ -293,7 +362,8 @@ const Header = () => {
               {/* Other Navigation Links */}
               {NAVIGATION_LINKS.filter(
                 (link) =>
-                  link.name !== 'News Feed' || (link.name === 'News Feed' && newsItems.length > 0)
+                  link.name !== "News Feed" ||
+                  (link.name === "News Feed" && newsData.length > 0),
               ).map((link) => (
                 <Link
                   key={link.name}
@@ -304,9 +374,9 @@ const Header = () => {
                     setShowMobileMenu(false);
                   }}
                   className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                    activeLink === link.name 
-                      ? 'text-[#F67A08]' 
-                      : 'text-gray-700 hover:text-[#F67A08]'
+                    activeLink === link.name
+                      ? "text-[#F67A08]"
+                      : "text-gray-700 hover:text-[#F67A08]"
                   }`}
                 >
                   {link.name}
