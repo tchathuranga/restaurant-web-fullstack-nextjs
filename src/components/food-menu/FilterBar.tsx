@@ -11,14 +11,21 @@ const notoSans = Noto_Sans({
 interface FilterBarProps {
   activeIndex: number;
   onSelect?: (dishName: string, index: number) => void;
+  subcategories?: string[];
+  activeSubcategory?: string | null;
+  onSubcategorySelect?: (subcategory: string | null) => void;
 }
 
-export default function FilterBar({ activeIndex, onSelect }: FilterBarProps) {
-
+export default function FilterBar({
+  activeIndex,
+  onSelect,
+  subcategories = [],
+  activeSubcategory = null,
+  onSubcategorySelect,
+}: FilterBarProps) {
   return (
     <div className="mb-4" style={{ backgroundColor: "#F5E6D8" }}>
-
-      <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-2 py-4">
+      <div className="flex flex-wrap justify-center gap-3 md:gap-4 py-4">
         {FOOD_MENU_ITEMS.map((dish, index) => (
           <button
             key={dish.name}
@@ -38,6 +45,38 @@ export default function FilterBar({ activeIndex, onSelect }: FilterBarProps) {
           </button>
         ))}
       </div>
+
+      {subcategories.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 pb-4 px-4">
+          <button
+            onClick={() => onSubcategorySelect?.(null)}
+            className={`px-3 py-1.5 rounded-full text-xs md:text-sm transition-colors duration-200 ${
+              notoSans.className
+            } ${
+              !activeSubcategory
+                ? "bg-[#F67A08] text-white"
+                : "bg-white text-black border border-orange-200 hover:bg-orange-50"
+            }`}
+          >
+            All
+          </button>
+          {subcategories.map((subcategory) => (
+            <button
+              key={subcategory}
+              onClick={() => onSubcategorySelect?.(subcategory)}
+              className={`px-3 py-1.5 rounded-full text-xs md:text-sm transition-colors duration-200 ${
+                notoSans.className
+              } ${
+                activeSubcategory === subcategory
+                  ? "bg-[#F67A08] text-white"
+                  : "bg-white text-black border border-orange-200 hover:bg-orange-50"
+              }`}
+            >
+              {subcategory}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

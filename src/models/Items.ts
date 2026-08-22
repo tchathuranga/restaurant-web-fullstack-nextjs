@@ -19,12 +19,23 @@ const ItemSchema = new mongoose.Schema<ItemProps>(
       type: String,
     },
     category: {
-      type: String, 
+      type: String,
+    },
+    subcategory: {
+      type: String,
     },
   },
   {
     timestamps: true,
   }
 );
+
+if (mongoose.models.Item && !mongoose.models.Item.schema.path('subcategory')) {
+  mongoose.models.Item.schema.add({
+    subcategory: {
+      type: String,
+    },
+  });
+}
 
 export default mongoose.models.Item || mongoose.model<ItemProps>('Item', ItemSchema);

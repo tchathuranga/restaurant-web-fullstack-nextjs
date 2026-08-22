@@ -2,6 +2,7 @@ export const ITEM_DATA = [
   //Cafe Items
     {
       category:"Cafe Items",
+      subcategory:"Coffee",
       image: "/images/foods/cafe items/Espresso.png",
       title: "Espresso",
       description:
@@ -11,6 +12,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cafe Items",
+      subcategory:"Coffee",
       image: "/images/foods/cafe items/vanisspresso.png",
       title: "Vanisspresso",
       description:
@@ -20,6 +22,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cafe Items",
+      subcategory:"Tea",
       image: "/images/foods/cafe items/masala tea.png",
       title: "Masala Tea",
       description:
@@ -29,6 +32,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cafe Items",
+      subcategory:"Frappe",
       image: "/images/foods/cafe items/Caramal Frappe.png",
       title: "Caramal Frappe",
       description:
@@ -38,6 +42,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cafe Items",
+      subcategory:"Frappe",
       image: "/images/foods/cafe items/chocolote frappe.png",
       title: "Chocolote Frappe",
       description:
@@ -47,6 +52,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cafe Items",
+      subcategory:"Frappe",
       image: "/images/foods/cafe items/Cinnamocha.png",
       title: "Cinnamocha",
       description:
@@ -58,6 +64,7 @@ export const ITEM_DATA = [
     //North Indian
     {
       category:"North Indian",
+      subcategory:"Naan",
       image: "/images/foods/North Indian/Butter Naan.png",
       title: "Butter Naan",
       description:
@@ -67,6 +74,7 @@ export const ITEM_DATA = [
     },
     {
       category:"North Indian",
+      subcategory:"Chole Bhature",
       image: "/images/foods/North Indian/Channa Batura.png",
       title: "Channa Batura",
       description:
@@ -76,6 +84,7 @@ export const ITEM_DATA = [
     },
     {
       category:"North Indian",
+      subcategory:"Naan",
       image: "/images/foods/North Indian/Kashmiri Nann.png",
       title: "Kashmiri Nann",
       description:
@@ -85,6 +94,7 @@ export const ITEM_DATA = [
     },
     {
       category:"North Indian",
+      subcategory:"Naan",
       image: "/images/foods/North Indian/Kashmiri Nann2.png",
       title: "Kashmiri Nann",
       description:
@@ -94,6 +104,7 @@ export const ITEM_DATA = [
     },
     {
       category:"North Indian",
+      subcategory:"Naan",
       image: "/images/foods/North Indian/Kurumi Naan.png",
       title: "Kurumi Naan",
       description:
@@ -103,6 +114,7 @@ export const ITEM_DATA = [
     },
     {
       category:"North Indian",
+      subcategory:"Paratha",
       image: "/images/foods/North Indian/Stuffed Parata.png",
       title: "Stuffed Parata",
       description:
@@ -114,6 +126,7 @@ export const ITEM_DATA = [
     //South Indian
     {
       category:"South Indian",
+      subcategory:"Roti",
       image: "/images/foods/South indian/Chapathi.png",
       title: "Chapathi",
       description:
@@ -123,6 +136,7 @@ export const ITEM_DATA = [
     },
     {
       category:"South Indian",
+      subcategory:"Dosa",
       image: "/images/foods/South indian/Ghee Dosai.png",
       title: "Ghee Dosai",
       description:
@@ -132,6 +146,7 @@ export const ITEM_DATA = [
     },
     {
       category:"South Indian",
+      subcategory:"Uttapam",
       image: "/images/foods/South indian/Onion Oothapam.png",
       title: "Onion Oothapam",
       description:
@@ -141,6 +156,7 @@ export const ITEM_DATA = [
     },
     {
       category:"South Indian",
+      subcategory:"Dosa",
       image: "/images/foods/South indian/Masala Dosai.png",
       title: "Masala Dosai",
       description:
@@ -150,6 +166,7 @@ export const ITEM_DATA = [
     },
     {
       category:"South Indian",
+      subcategory:"Dosa",
       image: "/images/foods/South indian/Rava Dosa.png",
       title: "Rava Dosa",
       description:
@@ -159,6 +176,7 @@ export const ITEM_DATA = [
     },
     {
       category:"South Indian",
+      subcategory:"Uttapam",
       image: "/images/foods/South indian/Vegitable Oothapam.png",
       title: "Vegitable Oothapam",
       description:
@@ -170,6 +188,7 @@ export const ITEM_DATA = [
     //Cakes
     {
       category:"Cakes",
+      subcategory:"Specialty Cakes",
       image: "/images/foods/cakes/Choco chip Banana cake.png",
       title: "Choco chip Banana cake",
       description:
@@ -179,6 +198,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cakes",
+      subcategory:"Specialty Cakes",
       image: "/images/foods/cakes/Strawberry paradise cake.png",
       title: "Strawberry paradise cake",
       description:
@@ -188,6 +208,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cakes",
+      subcategory:"Specialty Cakes",
       image: "/images/foods/cakes/Mango Cream cake.png",
       title: "Mango Cream cake",
       description:
@@ -197,6 +218,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cakes",
+      subcategory:"Cupcakes",
       image: "/images/foods/cakes/Cup Cakes.png",
       title: "Cup Cakes",
       description:
@@ -206,6 +228,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cakes",
+      subcategory:"Specialty Cakes",
       image: "/images/foods/cakes/Chocolate lava cake.png",
       title: "Chocolate lava cake",
       description:
@@ -215,6 +238,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Cakes",
+      subcategory:"Specialty Cakes",
       image: "/images/foods/cakes/Pyramid cake.png",
       title: "Pyramid cake",
       description:
@@ -226,6 +250,7 @@ export const ITEM_DATA = [
     //Ice Cream
         {
       category:"Ice Cream",
+      subcategory:"Sundaes",
       image: "/images/foods/Ice Cream/Banana Boat.png",
       title: "Banana Boat",
       description:
@@ -235,6 +260,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Ice Cream",
+      subcategory:"Sundaes",
       image: "/images/foods/Ice Cream/Chocolate craze.png",
       title: "Chocolate craze",
       description:
@@ -244,6 +270,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Ice Cream",
+      subcategory:"Sundaes",
       image: "/images/foods/Ice Cream/Cookie Cream.png",
       title: "Cookie Cream",
       description:
@@ -253,6 +280,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Ice Cream",
+      subcategory:"Fruit Ice Cream",
       image: "/images/foods/Ice Cream/Mango.png",
       title: "Mango",
       description:
@@ -262,6 +290,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Ice Cream",
+      subcategory:"Sundaes",
       image: "/images/foods/Ice Cream/Rocky Road.png",
       title: "Rocky Road",
       description:
@@ -271,6 +300,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Ice Cream",
+      subcategory:"Fruit Ice Cream",
       image: "/images/foods/Ice Cream/Strawberry red.png",
       title: "Strawberry red",
       description:
@@ -282,6 +312,7 @@ export const ITEM_DATA = [
     //chat items
     {
       category:"Chaat Items",
+      subcategory:"Puri",
       image: "/images/foods/chaat items/Paani poori.png",
       title: "Paani poori",
       description:
@@ -291,6 +322,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Chaat Items",
+      subcategory:"Puri",
       image: "/images/foods/chaat items/Bhel Puri.png",
       title: "Bhel Puri",
       description:
@@ -300,6 +332,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Chaat Items",
+      subcategory:"Papdi",
       image: "/images/foods/chaat items/Papdi chat.png",
       title: "Papdi chat",
       description:
@@ -311,6 +344,7 @@ export const ITEM_DATA = [
     //Juices
     {
       category:"Juices",
+      subcategory:"Sodas",
       image: "/images/foods/Juices/Mint Lime Soda.png",
       title: "Mint Lime Soda",
       description:
@@ -320,6 +354,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Juices",
+      subcategory:"Sharbat",
       image: "/images/foods/Juices/Nannari Sharubat.png",
       title: "Nannari Sharubat",
       description:
@@ -329,6 +364,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Juices",
+      subcategory:"Sharbat",
       image: "/images/foods/Juices/Watermelon Sharubat.png",
       title: "Watermelon Sharubat",
       description:
@@ -338,6 +374,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Juices",
+      subcategory:"Fresh Juices",
       image: "/images/foods/Juices/Avocado Juice.png",
       title: "Avocado Juice",
       description:
@@ -347,6 +384,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Juices",
+      subcategory:"Fresh Juices",
       image: "/images/foods/Juices/Mango Juice.png",
       title: "Mango Juice",
       description:
@@ -356,6 +394,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Juices",
+      subcategory:"Sodas",
       image: "/images/foods/Juices/Orange Mint Soda.png",
       title: "Orange Mint Soda",
       description:
@@ -367,6 +406,7 @@ export const ITEM_DATA = [
     //sweets
     {
       category:"Sweets",
+      subcategory:"Halwa",
       image: "/images/foods/sweets/Carrot halwa.png",
       title: "Carrot halwa",
       description:
@@ -376,6 +416,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Sweets",
+      subcategory:"Milk Sweets",
       image: "/images/foods/sweets/Gulab Jamun.png",
       title: "Gulab Jamun",
       description:
@@ -385,6 +426,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Sweets",
+      subcategory:"Burfi",
       image: "/images/foods/sweets/Maysoor Pack.png",
       title: "Maysoor Pack",
       description:
@@ -394,6 +436,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Sweets",
+      subcategory:"Burfi",
       image: "/images/foods/sweets/Pista burfi.png",
       title: "Pista burfi",
       description:
@@ -403,6 +446,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Sweets",
+      subcategory:"Traditional Sweets",
       image: "/images/foods/sweets/Soan Papdi.png",
       title: "Soan Papdi",
       description:
@@ -412,6 +456,7 @@ export const ITEM_DATA = [
     },
     {
       category:"Sweets",
+      subcategory:"Ladoo",
       image: "/images/foods/sweets/Mothi Ladoo.png",
       title: "Mothi Ladoo",
       description:
