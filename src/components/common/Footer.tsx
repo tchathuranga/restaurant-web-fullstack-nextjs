@@ -16,6 +16,14 @@ const notoSans = Noto_Sans({
   subsets: ["latin"],
 });
 
+const BRANCHES = [
+  "Thummulla",
+  "Nugegoda",
+  "Kelaniya",
+  "Dehiwala",
+  "Wattala"
+];
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#F36A3A] text-white pt-12 pb-6 overflow-hidden">
@@ -122,57 +130,24 @@ export default function Footer() {
             Branches
           </h4>
           <div className="flex gap-10 w-full justify-center">
-            <div>
-              <ul className="space-y-2 text-xs">
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Colombo 03</span>
-                </li>
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Thummulla</span>
-                </li>
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Nugegoda</span>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <ul className="space-y-2 text-xs">
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Mattakkuliya</span>
-                </li>
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Kelaniya</span>
-                </li>
-                <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                  <MapPin
-                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-white/90">Dehiwala</span>
-                </li>
-              </ul>
-            </div>
+            {[BRANCHES.slice(0, 3), BRANCHES.slice(3)].map((column, index) => (
+              <div key={index}>
+                <ul className="space-y-2 text-xs">
+                  {column.map((branch) => (
+                    <li
+                      key={branch}
+                      className={`flex items-start gap-2 ${notoSans.className}`}
+                    >
+                      <MapPin
+                        className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
+                        strokeWidth={1.5}
+                      />
+                      <span className="text-white/90">{branch}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -288,48 +263,18 @@ export default function Footer() {
               Branches
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Colombo 03</span>
-              </li>
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Thummulla</span>
-              </li>
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Nugegoda</span>
-              </li>
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Mattakkuliya</span>
-              </li>
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Kelaniya</span>
-              </li>
-              <li className={`flex items-start gap-2 ${notoSans.className}`}>
-                <MapPin
-                  className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                />
-                <span className="text-white/90">Dehiwala</span>
-              </li>
+              {BRANCHES.map((branch) => (
+                <li
+                  key={branch}
+                  className={`flex items-start gap-2 ${notoSans.className}`}
+                >
+                  <MapPin
+                    className="w-3.5 h-3.5 text-white/80 flex-shrink-0 mt-0.5"
+                    strokeWidth={1.5}
+                  />
+                  <span className="text-white/90">{branch}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -343,34 +288,42 @@ export default function Footer() {
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
                 >
-                  Menu
+                  Home
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/outdoor-catering"
                   className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
                 >
-                  Reservations
+                  Outdoor Catering
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/join-the-team"
                   className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
                 >
-                  Events
+                  Join the Team
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/contact-us"
                   className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
                 >
-                  Gallery
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/our-story"
+                  className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
+                >
+                  Our Story
                 </a>
               </li>
             </ul>

@@ -44,7 +44,7 @@ export default function OurStory() {
   return (
     <div>
       <Banner
-        singleImage="/images/ourStoryBanner.png"
+        singleImage="/images/ourStoryBanner.jpeg"
         content={{
           title: "Our Story...",
           subtitle: "Welcome to Sri Vihar Indian Restaurant.",
