@@ -27,7 +27,7 @@ const ItemCardContainer = ({
   imageAlt 
 }: ItemCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 max-w-sm mx-auto">
+    <div className="sv-card mx-auto max-w-sm overflow-hidden">
       {/* Image Section - Top */}
 
       <div className="relative w-full h-48">
@@ -44,14 +44,14 @@ const ItemCardContainer = ({
       <div className="p-8">
         {/* Title */}
         <h3 
-          className={`text-lg font-semibold text-gray-900 mb-2 line-clamp-2 text-left ${lora.className}`}
+            className={`sv-heading mb-2 line-clamp-2 text-left text-lg ${lora.className}`}
         >
           {title}
         </h3>
 
         {/* Description */}
         <p 
-          className={`text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3 text-left ${notoSans.className}`}
+            className={`mb-3 line-clamp-3 text-left text-sm leading-relaxed text-ink-muted ${notoSans.className}`}
         >
           {description}
         </p>
@@ -60,7 +60,7 @@ const ItemCardContainer = ({
         {price && (
           <div className="flex justify-between items-center">
             <span 
-              className={`text-[#F67A08] font-semibold text-lg ${notoSans.className}`}
+              className={`text-lg font-semibold text-saffron ${notoSans.className}`}
             >
               {price}
             </span>

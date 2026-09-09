@@ -1,10 +1,5 @@
-import { Lora } from 'next/font/google';
 import CardContainer, { Card } from './CardContainer';
-
-const lora = Lora({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-});
+import SectionHeading from '../common/SectionHeading';
 
 const cards: Card[] = [
   {
@@ -41,8 +36,13 @@ const cards: Card[] = [
 
 const OurValues = () => {
   return (
-    <div className="text-center px-4 md:px-10 lg:px-30 py-20 relative" style={{ backgroundColor: '#FFF1D6' }}>
-      <h2 className={`font-bold mb-8 text-gray-900 ${lora.className}`} style={{ fontSize: '34px' }}>Our Values</h2>
+    <div className="sv-band relative px-4 py-20 md:px-10 lg:px-30">
+      <SectionHeading
+        className="mb-10"
+        eyebrow="What we stand for"
+        title="Our Values"
+        subtitle="Hospitality, freshness, and recipes passed down with care."
+      />
       <CardContainer cards={cards} />
     </div>
   );

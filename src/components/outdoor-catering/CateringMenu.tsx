@@ -1,21 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Lora, Noto_Sans } from "next/font/google";
-import { ITEM_DATA } from "@/const/dishes";
 import ItemContainer from "../common/ItemContainer";
 import { fetchAllItems } from "@/services/ItemService";
 import { ItemProps } from "@/interfaces/Items";
-
-const lora = Lora({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
-
-const notoSans = Noto_Sans({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+import SectionHeading from "../common/SectionHeading";
 
 export default function CateringMenu() {
   const [selectedDish, setSelectedDish] = useState(0);
@@ -52,37 +41,29 @@ export default function CateringMenu() {
   );
 
   return (
-    <div className="lg:px-30 md:px-20 sm:px-10 px-10 pb-2 mx-auto">
-      <h2
-        className={`px-10 font-bold text-gray-900 text-center py-6 ${lora.className}`}
-        style={{ fontSize: "34px" }}
-      >
-        Our Catering Menu Includes
-      </h2>
+    <div className="mx-auto px-6 pb-8 sm:px-10 md:px-20 lg:px-30">
+      <SectionHeading
+        className="py-8"
+        eyebrow="Feast for your guests"
+        title="Our Catering Menu Includes"
+      />
 
-      <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-10">
+      <div className="mb-10 flex flex-wrap justify-center gap-3 md:gap-4">
         {error && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-red-600 text-lg">{error}</p>
+          <div className="sv-card px-4 py-6 text-center">
+            <p className="text-lg text-maroon">{error}</p>
           </div>
         )}
         {loading && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-red-600 text-lg">Loading Items</p>
+          <div className="sv-card px-4 py-6 text-center">
+            <p className="text-lg text-ink-muted">Loading items...</p>
           </div>
         )}
         {dishes.map((dish, index) => (
           <button
             key={dish}
             onClick={() => setSelectedDish(index)}
-            className={`px-4 py-2 rounded-full text-sm md:text-base font-small transition-colors duration-200 shadow-lg ${
-              notoSans.className
-            }  ${
-              selectedDish === index
-                ? "bg-[#F67A08] text-white border-[#F67A08] hover:bg-[#E5690A] hover:border-[#E5690A]"
-                : "bg-white text-black hover:bg-gray-100"
-            }`}
-            style={{ fontSize: "15px" }}
+            className={`sv-chip ${selectedDish === index ? "sv-chip-active" : ""}`}
           >
             {dish}
           </button>

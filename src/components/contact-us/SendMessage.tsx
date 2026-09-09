@@ -77,25 +77,22 @@ export default function SendMessage() {
     };
 
     return (
-      <div
-        className="lg:px-30 md:px-20 sm:px-10 px-10 py-12 mx-auto"
-        style={{ backgroundColor: "#FBFBFA" }}
-      >
-        {/* Contact Form Section */}
-        <div className="max-w-2xl mx-auto mb-16">
+      <div className="mx-auto px-6 py-12 sm:px-10 md:px-20 lg:px-30">
+        <div className="mx-auto mb-16 max-w-2xl">
+          <p className="sv-eyebrow mb-2 text-center">We would love to hear from you</p>
           <h2
-            className={`text-3xl font-bold text-gray-900 mb-8 text-center ${lora.className}`}
+            className={`sv-heading mb-8 text-center text-3xl ${lora.className}`}
           >
             Send us a Message
           </h2>
 
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="sv-card p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
                 <label
                   htmlFor="name"
-                  className={`block text-sm text-gray-600 mb-2 ${notoSans.className}`}
+                  className={`mb-2 block text-sm text-ink-muted ${notoSans.className}`}
                 >
                   Name
                 </label>
@@ -106,7 +103,7 @@ export default function SendMessage() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className={`w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent ${notoSans.className}`}
+                  className={`sv-input ${notoSans.className}`}
                   required
                   disabled={isSubmitting}
                 />
@@ -116,7 +113,7 @@ export default function SendMessage() {
               <div>
                 <label
                   htmlFor="email"
-                  className={`block text-sm text-gray-600 mb-2 ${notoSans.className}`}
+                  className={`mb-2 block text-sm text-ink-muted ${notoSans.className}`}
                 >
                   Email
                 </label>
@@ -127,7 +124,7 @@ export default function SendMessage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Your Email"
-                  className={`w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent ${notoSans.className}`}
+                  className={`sv-input ${notoSans.className}`}
                   required
                   disabled={isSubmitting}
                 />
@@ -137,7 +134,7 @@ export default function SendMessage() {
               <div>
                 <label
                   htmlFor="subject"
-                  className={`block text-sm text-gray-600 mb-2 ${notoSans.className}`}
+                  className={`mb-2 block text-sm text-ink-muted ${notoSans.className}`}
                 >
                   Subject
                 </label>
@@ -148,7 +145,7 @@ export default function SendMessage() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Message Subject"
-                  className={`w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent ${notoSans.className}`}
+                  className={`sv-input ${notoSans.className}`}
                   required
                   disabled={isSubmitting}
                 />
@@ -158,7 +155,7 @@ export default function SendMessage() {
               <div>
                 <label
                   htmlFor="message"
-                  className={`block text-sm text-gray-600 mb-2 ${notoSans.className}`}
+                  className={`mb-2 block text-sm text-ink-muted ${notoSans.className}`}
                 >
                   Message
                 </label>
@@ -169,7 +166,7 @@ export default function SendMessage() {
                   onChange={handleChange}
                   placeholder="Your Message"
                   rows={5}
-                  className={`w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none ${notoSans.className}`}
+                  className={`sv-input resize-none ${notoSans.className}`}
                   required
                   disabled={isSubmitting}
                 />
@@ -201,7 +198,7 @@ export default function SendMessage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full bg-orange-400 text-white font-semibold py-3 px-6 rounded-md hover:bg-orange-500 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center ${notoSans.className}`}
+                  className={`sv-btn w-full disabled:cursor-not-allowed disabled:opacity-60 ${notoSans.className}`}
                 >
                   {isSubmitting ? (
                     <>
@@ -246,7 +243,7 @@ export default function SendMessage() {
           />
 
           <p
-            className={`text-xl sm:text-2xl md:text-3xl text-gray-700 py-8 md:py-20 text-center md:text-left ${kalam.className}`}
+            className={`py-8 text-center text-xl text-maroon sm:text-2xl md:py-20 md:text-left md:text-3xl ${kalam.className}`}
             style={{ transform: "rotate(-1deg)" }}
           >
             We are just a phone call away....
@@ -255,5 +252,4 @@ export default function SendMessage() {
       </div>
     );
 }
-
  

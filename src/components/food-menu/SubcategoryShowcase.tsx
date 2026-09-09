@@ -44,7 +44,7 @@ export default function SubcategoryShowcase({
 
   return (
     <div
-      className={`overflow-hidden rounded-[1.6rem] bg-[#FFF8F0] transition-shadow duration-500 ${
+      className={`overflow-hidden rounded-[1.6rem] bg-[#FFF8F0] transition-shadow duration-500 mb-10 ${
         isExpanded
           ? "shadow-[0_16px_40px_rgba(139,37,0,0.18)]"
           : "shadow-xl hover:shadow-2xl"
@@ -69,38 +69,10 @@ export default function SubcategoryShowcase({
               <div className="h-full w-full bg-gradient-to-br from-[#F5E6D8] to-[#F4BD50]" />
             )}
 
-            {sideImages.length > 0 && (
-              <div className="absolute top-5 right-5 hidden w-24 flex-col gap-3 sm:flex md:w-28">
-                {sideImages.map((image, index) => (
-                  <div
-                    key={`${subcategory}-side-${index}`}
-                    className="relative h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full border-2 border-[#F4BD50] shadow-[0_0_0_3px_rgba(139,37,0,0.35)] md:h-20 md:w-20"
-                  >
-                    <Image
-                      src={image}
-                      alt=""
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+             
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#4A1408]/90 via-[#8B2500]/45 to-[#F4BD50]/10" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#3D1F0A]/55 to-transparent" />
-
-            <PaisleyCorner className="absolute left-3 top-3 h-9 w-9 text-[#F4BD50]/80" />
-            <PaisleyCorner className="absolute right-3 top-3 h-9 w-9 rotate-90 text-[#F4BD50]/80" />
-
-            <div
-              className="absolute inset-x-0 top-0 h-8 opacity-40"
-              style={{
-                backgroundImage: "radial-gradient(circle, #F4BD50 1.2px, transparent 1.6px)",
-                backgroundSize: "10px 10px",
-              }}
-            />
 
             <div className="absolute inset-0 flex items-end justify-between gap-4 p-5 sm:p-8">
               <div className="min-w-0">

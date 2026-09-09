@@ -21,11 +21,11 @@ interface CurrentJobsProps {
 export default function CurrentJobs({ JobData }: CurrentJobsProps) {
     return (
       <div
-        className="lg:px-30 md:px-20 sm:px-10 px-10 pb-6  mx-auto"
-        style={{ backgroundColor: "#FBFBFA" }}
+        className="sv-band mx-auto px-6 pb-8 sm:px-10 md:px-20 lg:px-30"
       >
+        <p className="sv-eyebrow pt-8 text-center">Work with us</p>
         <h2
-          className={`px-10 font-bold text-gray-900 text-center py-10 ${lora.className}`}
+          className={`sv-heading px-6 py-6 text-center ${lora.className}`}
           style={{ fontSize: "34px" }}
         >
           Current Job Openings
@@ -35,27 +35,27 @@ export default function CurrentJobs({ JobData }: CurrentJobsProps) {
           {JobData.map((job, index) => (
             <div
               key={index}
-              className="bg-green-100 rounded-lg p-6 flex flex-col flex-1 max-w-sm mx-auto md:max-w-none"
+              className="sv-card mx-auto flex max-w-sm flex-1 flex-col p-6 md:max-w-none"
             >
               <h3
-                className={`font-medium text-gray-900 mb-4 ${notoSans.className}`}
+                className={`sv-heading mb-4 ${notoSans.className}`}
                 style={{ fontSize: "24px" }}
               >
                 {job.title}
               </h3>
               <div className="flex items-center mb-3">
-                <MapPin className="w-5 h-5 text-gray-700 mr-2" />
+                <MapPin className="mr-2 h-5 w-5 text-saffron" />
                 <span
-                  className={`text-gray-700 ${notoSans.className}`}
+                  className={`text-ink ${notoSans.className}`}
                   style={{ fontSize: "16px" }}
                 >
                   {job.location}
                 </span>
               </div>
               <div className="flex items-center mb-4">
-                <Clock className="w-5 h-5 text-gray-700 mr-2" />
+                <Clock className="mr-2 h-5 w-5 text-saffron" />
                 <span
-                  className={`text-gray-700 ${notoSans.className}`}
+                  className={`text-ink ${notoSans.className}`}
                   style={{ fontSize: "16px" }}
                 >
                   {job.type}
@@ -63,12 +63,12 @@ export default function CurrentJobs({ JobData }: CurrentJobsProps) {
               </div>
 
               <div
-                className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 line-clamp-3 text-justify ${notoSans.className}`}
+                className={`mb-4 line-clamp-3 text-justify text-sm leading-relaxed text-ink-muted md:mb-5 md:text-base ${notoSans.className}`}
                 dangerouslySetInnerHTML={{ __html: job.description }}
               />
               <Link href={`/join-the-team/jobs/${job._id}`}>
                 <button
-                  className={`w-full border-2 border-orange-300 text-orange-400 font-semibold py-2 px-6 rounded-md hover:bg-orange-50 transition-colors ${notoSans.className}`}
+                  className={`sv-btn-outline w-full ${notoSans.className}`}
                   style={{ fontSize: "16px" }}
                 >
                   View Details

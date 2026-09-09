@@ -1,17 +1,9 @@
+"use client";
+
 import Image from 'next/image';
-import { Noto_Sans, Lora } from 'next/font/google';
 import NewsDialog from '../news-feed/NewsDialog';
 import { useState } from 'react';
-
-const notoSans = Noto_Sans({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-});
-
-const lora = Lora({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-});
+import { PaisleyCorner } from './IndianMotifs';
 
 interface NewsFieldProps {
   image: string;
@@ -32,47 +24,39 @@ const NewsField = ({ image, title, description, imageAlt }: NewsFieldProps) => {
   };
 
   return (
-    <div className="px-6 sm:px-6 md:px-12 lg:px-24 pt-8 sm:pt-12 md:pt-16 lg:pt-20">
-      <div className="flex flex-col md:flex-row overflow-hidden duration-300 gap-4 md:gap-0">
-        {/* Left side - Image */}
-        <div className="w-full md:w-1/2 lg:w-2/5 relative p-1 sm:p-2 md:p-4">
-          <div className="aspect-[4/3] relative rounded-lg overflow-hidden">
-            <Image
-              src={image}
-              alt={imageAlt || title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-            />
+    <div className="px-6 pt-8 sm:px-6 sm:pt-12 md:px-12 md:pt-16 lg:px-24 lg:pt-20">
+      <div className="sv-card relative overflow-hidden p-4 md:p-6">
+        <PaisleyCorner className="absolute right-4 top-4 hidden h-10 w-10 rotate-90 text-gold/50 md:block" />
+        <div className="flex flex-col gap-4 overflow-hidden md:flex-row md:gap-8">
+          <div className="relative w-full p-1 md:w-1/2 lg:w-2/5">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-gold/30">
+              <Image
+                src={image}
+                alt={imageAlt || title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Right side - Content */}
-        <div className="w-full md:w-1/2 lg:w-3/5 relative p-1 sm:p-2 md:p-4 md:ml-6 lg:ml-10 mt-4 md:mt-0 lg:mt-12">
-          <div>
-            {/* Title */}
-            <h3
-              className={`text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 line-clamp-2 ${lora.className}`}
-            >
+          <div className="mt-2 flex w-full flex-col justify-center p-1 md:mt-0 md:w-1/2 lg:w-3/5">
+            <p className="sv-eyebrow mb-2">Latest from Sri Vihar</p>
+            <h3 className="sv-heading mb-3 line-clamp-2 text-2xl md:text-3xl">
               {title}
             </h3>
-
-            {/* Description */}
             <div
-              className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 line-clamp-3 ${notoSans.className}`}
+              className="mb-5 line-clamp-3 text-sm leading-relaxed text-ink-muted md:text-base"
               dangerouslySetInnerHTML={{ __html: description }}
             />
-          </div>
-
-          {/* See More Link */}
-          <div className="mt-auto">
-            <a
-              className={`inline-flex items-center text-[#F67A08] hover:text-[#E5690A] font-medium text-sm md:text-base transition-colors duration-200 group ${notoSans.className}`}
+            <button
+              type="button"
+              className="group inline-flex items-center font-medium text-saffron transition-colors hover:text-saffron-deep"
               onClick={handleSeeMore}
             >
               See More
               <svg
-                className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
+                className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -84,7 +68,7 @@ const NewsField = ({ image, title, description, imageAlt }: NewsFieldProps) => {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </div>

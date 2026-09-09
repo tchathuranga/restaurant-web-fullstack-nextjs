@@ -70,7 +70,7 @@ export default function JobDetailPage({ params }: PageProps) {
           <p className={`text-gray-600 mb-4 ${notoSans.className}`}>{error}</p>
           <Link
             href="/join-the-team"
-            className={`text-orange-400 hover:underline ${notoSans.className}`}
+            className={`text-saffron hover:underline ${notoSans.className}`}
           >
             Back to Jobs
           </Link>
@@ -94,12 +94,11 @@ export default function JobDetailPage({ params }: PageProps) {
 
       {/* Job Post */}
       <div
-        className="lg:px-30 md:px-20 sm:px-10 px-10 py-10 pb-6 mx-auto"
-        style={{ backgroundColor: "#FBFBFA" }}
+        className="mx-auto px-6 py-10 pb-6 sm:px-10 md:px-20 lg:px-30"
       >
         <Link
           href="/join-the-team"
-          className={`inline-flex items-center text-orange-400 hover:text-orange-500 mb-6 ${notoSans.className}`}
+          className={`mb-6 inline-flex items-center text-saffron hover:text-saffron-deep ${notoSans.className}`}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Jobs
@@ -115,7 +114,7 @@ export default function JobDetailPage({ params }: PageProps) {
           {/* Job Title - Centered */}
           <div className="text-center mb-6">
             <h1
-              className={`text-3xl md:text-4xl font-bold text-gray-900 ${lora.className}`}
+              className={`sv-heading text-3xl md:text-4xl ${lora.className}`}
             >
               {vacancyData.title}
             </h1>
@@ -124,14 +123,14 @@ export default function JobDetailPage({ params }: PageProps) {
           {/* Location and Employment Type */}
           <div className="flex flex-wrap gap-4 justify-center mb-8">
             <div className="flex items-center">
-              <MapPin className="w-5 h-5 text-gray-700 mr-2" />
-              <span className={`text-gray-700 ${notoSans.className}`}>
+              <MapPin className="mr-2 h-5 w-5 text-saffron" />
+              <span className={`text-ink ${notoSans.className}`}>
                 {vacancyData.location}
               </span>
             </div>
             <div className="flex items-center">
-              <Clock className="w-5 h-5 text-gray-700 mr-2" />
-              <span className={`text-gray-700 ${notoSans.className}`}>
+              <Clock className="mr-2 h-5 w-5 text-saffron" />
+              <span className={`text-ink ${notoSans.className}`}>
                 {vacancyData.type}
               </span>
             </div>
@@ -140,7 +139,7 @@ export default function JobDetailPage({ params }: PageProps) {
           {/* Introductory Text */}
           {vacancyData.description && (
             <div
-              className={`text-gray-700 text-base md:text-lg leading-relaxed lg:px-50 md:px-10 text-justify   ${notoSans.className}`}
+              className={`text-justify text-base leading-relaxed text-ink-muted md:px-10 md:text-lg lg:px-50 ${notoSans.className}`}
               dangerouslySetInnerHTML={{ __html: vacancyData.description }}
             />
           )}

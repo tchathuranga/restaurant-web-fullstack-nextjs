@@ -75,7 +75,7 @@ const BRANCHES = [
 ];
 
 const ORDER_OPTION_LINK_CLASS =
-  "block w-full rounded-2xl border border-gray-200 bg-white px-3 py-2 text-center text-sm text-gray-700 hover:bg-blue-50";
+  "block w-full rounded-2xl border border-gold/40 bg-ivory px-3 py-2.5 text-center text-sm text-ink hover:bg-cream";
 
 const Header = () => {
   const router = useRouter();
@@ -134,25 +134,25 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white relative z-50">
-      {/* Top section with logo */}
+    <header className="relative z-50 border-b  bg-ivory/95 backdrop-blur-md">
+      {/* <div className="h-1.5 bg-gradient-to-r from-maroon via-saffron to-gold" /> */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-center">
           <Link href="/" className="cursor-pointer" onClick={() => setActiveLink("")}>
             <Image
-              src="/images/Logo.png"
+              src="/images/logo.png"
               alt="Sri Vihar Logo"
-              width={150}
+              width={200}
               height={60}
-              className="object-contain lg:w-[190px] lg:h-[80px]"
+              className="object-contain lg:w-[380px] lg:h-[140px]"
               priority
             />
           </Link>
         </div>
       </div>
+      {/* <div className="sv-gold-rule mx-auto w-4/5" /> */}
 
-      {/* Bottom section with navigation */}
-      <div className="container mx-auto pb-8 px-4 py-3">
+      <div className="container mx-auto kolam-border px-4 py-3 pb-8">
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-center relative">
           {/* Opening Hours Button - Left (Absolute positioned) */}
@@ -160,8 +160,7 @@ const Header = () => {
             <button
               onClick={() => setShowOpeningHours(!showOpeningHours)}
               onMouseEnter={() => setShowOpeningHours(!showOpeningHours)}
-              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium bg-white border-2 border-[#F67A08] text-[#F67A08] hover:bg-gray-50 rounded-md transition-colors"
-              style={{ borderColor: "#F67A08", color: "#F67A08" }}
+              className="sv-btn-outline text-sm"
             >
               <svg
                 className="w-4 h-4"
@@ -181,18 +180,18 @@ const Header = () => {
 
             {/* Branches Dropdown */}
             {showOpeningHours && (
-              <div className="absolute top-full left-0 mt-1 w-[28rem] max-w-[calc(100vw-1rem)] bg-white border border-gray-200 rounded-2xl shadow-lg z-50">
+              <div className="absolute top-full left-0 z-50 mt-2 w-[28rem] max-w-[calc(100vw-1rem)] overflow-hidden rounded-3xl border border-gold/40 bg-ivory shadow-xl">
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-3">
+                  <h3 className="sv-heading mb-3 text-lg">
                     Branches & Opening Hours
                   </h3>
                   <div className="space-y-3">
                     {BRANCHES.map((branch) => (
-                      <div key={branch.id} className="rounded-2xl border border-gray-200 bg-slate-50 p-3">
-                        <p className="text-sm font-semibold text-gray-900">{branch.name}</p>
-                        <p className="text-sm text-gray-600  pr-18">{branch.address}</p>
-                        <p className="text-sm text-gray-600">Hours: {branch.hours}</p>
-                        <p className="text-sm text-gray-600">Phone: {branch.phone}</p>
+                      <div key={branch.id} className="rounded-2xl border border-gold/30 bg-cream/70 p-3">
+                        <p className="text-sm font-semibold text-maroon">{branch.name}</p>
+                        <p className="pr-18 text-sm text-ink-muted">{branch.address}</p>
+                        <p className="text-sm text-ink-muted">Hours: {branch.hours}</p>
+                        <p className="text-sm text-ink-muted">Phone: {branch.phone}</p>
                       </div>
                     ))}
                   </div>
@@ -223,17 +222,17 @@ const Header = () => {
                   href="/food-menu"
                   onClick={() => setActiveLink("Food Menu")}
                   onMouseEnter={() => setShowFoodMenu(!showFoodMenu)}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium tracking-wide transition-colors ${
                     activeLink === "Food Menu"
-                      ? "text-[#F67A08]"
-                      : "text-gray-700 hover:text-[#F67A08]"
+                      ? "text-saffron"
+                      : "text-ink hover:text-saffron"
                   }`}
                 >
                   Food Menu
                 </Link>
                 <button
                   onClick={() => setShowFoodMenu(!showFoodMenu)}
-                  className="ml-1 text-gray-700 hover:text-[#F67A08] transition-colors"
+                  className="ml-1 text-ink hover:text-saffron transition-colors"
                 >
                   <svg
                     className="w-4 h-4"
@@ -253,7 +252,7 @@ const Header = () => {
 
               {/* Food Menu Dropdown */}
               {showFoodMenu && (
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                <div className="absolute top-full left-0 z-50 mt-2 w-52 overflow-hidden rounded-2xl border border-gold/40 bg-ivory shadow-xl">
                   <div className="py-2">
                     {FOOD_MENU_ITEMS.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
@@ -266,7 +265,7 @@ const Header = () => {
                           onClick={(event) =>
                             handleFoodMenuItemClick(event, item.name)
                           }
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                          className="block px-4 py-2.5 text-sm text-ink transition-colors hover:bg-cream hover:text-maroon"
                         >
                           {item.name}
                         </Link>
@@ -287,10 +286,10 @@ const Header = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setActiveLink(link.name)}
-                className={`text-sm font-medium transition-colors whitespace-nowrap ${
+                className={`whitespace-nowrap text-sm font-medium tracking-wide transition-colors ${
                   activeLink === link.name
-                    ? "text-[#F67A08]"
-                    : "text-gray-700 hover:text-[#F67A08]"
+                    ? "text-saffron"
+                    : "text-ink hover:text-saffron"
                 }`}
               >
                 {link.name}
@@ -304,17 +303,17 @@ const Header = () => {
               type="button"
               onClick={() => setShowOrderOnline(!showOrderOnline)}
               onMouseEnter={() => setShowOrderOnline(!showOrderOnline)}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#F67A08] bg-gradient-to-r from-[#F67A08] to-[#f9a03e] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-orange-200/30 transition duration-200 hover:from-[#f8911b] hover:to-[#ffb238] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 sm:px-4 sm:py-2.5 sm:text-sm"
+              className="sv-btn px-4 text-xs sm:text-sm"
             >
               <ShoppingBag size={16} className="text-white" />
               <span>Order Online</span>
             </button>
 
             {showOrderOnline && (
-              <div className="absolute top-full right-0 mt-2 w-[32rem] max-w-[calc(100vw-1rem)] bg-white border border-gray-200 rounded-3xl shadow-xl z-50 overflow-hidden">
+              <div className="absolute top-full right-0 z-50 mt-2 w-[32rem] max-w-[calc(100vw-1rem)] overflow-hidden rounded-3xl border border-gold/40 bg-ivory shadow-xl">
                 <div className="grid gap-4 p-4 md:grid-cols-[1.1fr_1.4fr]">
-                  <div className="rounded-2xl border border-gray-200 bg-slate-50 p-4">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+                  <div className="rounded-2xl border border-gold/30 bg-cream/70 p-4">
+                    <p className="sv-eyebrow mb-3">
                       Order options
                     </p>
                     {selectedBranch ? (
@@ -333,14 +332,14 @@ const Header = () => {
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-ink-muted">
                         Select a branch on the right to show online ordering options.
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Order online from a branch</h3>
+                    <h3 className="sv-heading mb-3 text-lg">Order online from a branch</h3>
                     <div className="space-y-2">
                       {BRANCHES.map((branch) => (
                         <button
@@ -349,12 +348,12 @@ const Header = () => {
                           onClick={() => setSelectedOrderBranch((current) => current === branch.id ? null : branch.id)}
                           className={`w-full rounded-2xl border px-3 py-3 text-left transition ${
                             selectedOrderBranch === branch.id
-                              ? "border-blue-300 bg-blue-50"
-                              : "border-gray-200 bg-slate-50 hover:border-blue-300 hover:bg-blue-50"
+                              ? "border-saffron bg-cream"
+                              : "border-gold/30 bg-parchment/70 hover:border-gold hover:bg-cream"
                           }`}
                         >
-                          <p className="text-sm font-semibold text-gray-900">{branch.name}</p>
-                          <p className="text-sm text-gray-600">{branch.address}</p>
+                          <p className="text-sm font-semibold text-maroon">{branch.name}</p>
+                          <p className="text-sm text-ink-muted">{branch.address}</p>
                         </button>
                       ))}
                     </div>
@@ -371,8 +370,7 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setShowOpeningHours(!showOpeningHours)}
-              className="flex items-center space-x-2 px-3 py-2 text-xs font-medium bg-white border-2 border-[#F67A08] text-[#F67A08] hover:bg-gray-50 rounded-md transition-colors"
-              style={{ borderColor: "#F67A08", color: "#F67A08" }}
+              className="sv-btn-outline px-3 text-xs"
             >
               <svg
                 className="w-3 h-3"
@@ -392,18 +390,18 @@ const Header = () => {
 
             {/* Branches Dropdown */}
             {showOpeningHours && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-2xl shadow-lg z-50">
+              <div className="absolute top-full left-0 z-50 mt-2 w-64 overflow-hidden rounded-2xl border border-gold/40 bg-ivory shadow-lg">
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-3">
+                  <h3 className="sv-heading mb-3 text-lg">
                     Branches & Opening Hours
                   </h3>
                   <div className="space-y-3">
                     {BRANCHES.map((branch) => (
-                      <div key={branch.id} className="rounded-2xl border border-gray-200 bg-slate-50 p-3">
-                        <p className="text-sm font-semibold text-gray-900">{branch.name}</p>
-                        <p className="text-sm text-gray-600">{branch.address}</p>
-                        <p className="text-sm text-gray-600">Hours: {branch.hours}</p>
-                        <p className="text-sm text-gray-600">Phone: {branch.phone}</p>
+                      <div key={branch.id} className="rounded-2xl border border-gold/30 bg-cream/70 p-3">
+                        <p className="text-sm font-semibold text-maroon">{branch.name}</p>
+                        <p className="text-sm text-ink-muted">{branch.address}</p>
+                        <p className="text-sm text-ink-muted">Hours: {branch.hours}</p>
+                        <p className="text-sm text-ink-muted">Phone: {branch.phone}</p>
                       </div>
                     ))}
                   </div>
@@ -416,16 +414,16 @@ const Header = () => {
             <button
               type="button"
               onClick={() => setShowOrderOnline((open) => !open)}
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-[#F67A08] bg-gradient-to-r from-[#F67A08] to-[#f9a03e] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-orange-200/30 transition duration-200 hover:from-[#f8911b] hover:to-[#ffb238] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 sm:px-4 sm:py-2.5 sm:text-sm"
+              className="sv-btn w-full px-3 text-xs sm:text-sm"
             >
               <ShoppingBag size={16} className="text-white" />
               <span>Order Online</span>
             </button>
 
             {showOrderOnline && (
-              <div className="fixed left-1/2 top-20 z-50 w-[min(92vw,26rem)] -translate-x-1/2 bg-white border border-gray-200 rounded-2xl shadow-lg">
+              <div className="fixed left-1/2 top-20 z-50 w-[min(92vw,26rem)] -translate-x-1/2 rounded-2xl border border-gold/40 bg-ivory shadow-lg">
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-3">Order Online</h3>
+                  <h3 className="sv-heading mb-3 text-lg">Order Online</h3>
                   <div className="space-y-2">
                     {BRANCHES.map((branch) => (
                       <button
@@ -434,18 +432,18 @@ const Header = () => {
                         onClick={() => setSelectedOrderBranch((current) => current === branch.id ? null : branch.id)}
                         className={`w-full rounded-2xl border px-3 py-3 text-left transition ${
                           selectedOrderBranch === branch.id
-                            ? "border-blue-300 bg-blue-50"
-                            : "border-gray-200 bg-slate-50 hover:border-blue-300 hover:bg-blue-50"
+                            ? "border-saffron bg-cream"
+                            : "border-gold/30 bg-parchment/70 hover:border-gold hover:bg-cream"
                         }`}
                       >
-                        <p className="text-sm font-semibold text-gray-900">{branch.name}</p>
-                        <p className="text-sm text-gray-600">{branch.address}</p>
+                        <p className="text-sm font-semibold text-maroon">{branch.name}</p>
+                        <p className="text-sm text-ink-muted">{branch.address}</p>
                       </button>
                     ))}
                   </div>
                   {selectedBranch && (
-                    <div className="mt-4 rounded-2xl border border-gray-200 bg-slate-50 p-3">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Choose delivery option</p>
+                    <div className="mt-4 rounded-2xl border border-gold/30 bg-cream/70 p-3">
+                      <p className="sv-eyebrow mb-2">Choose delivery option</p>
                       <div className="grid gap-2">
                         {ORDER_OPTIONS.map((option) => (
                           <a
@@ -470,7 +468,7 @@ const Header = () => {
           {/* Hamburger Menu Button - Right */}
           <button
             onClick={() => setShowMobileMenu(!showMobileMenu)}
-            className="p-2 text-gray-700 hover:text-[#F67A08] transition-colors"
+            className="p-2 text-ink hover:text-saffron transition-colors"
           >
             {showMobileMenu ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -478,7 +476,7 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {showMobileMenu && (
-          <div className="lg:hidden mt-4 bg-white border border-gray-200 rounded-md shadow-lg relative z-50">
+          <div className="relative z-50 mt-4 rounded-2xl border border-gold/40 bg-ivory shadow-lg lg:hidden">
             <div className="py-2">
               {/* Home Link */}
               <Link
@@ -488,10 +486,10 @@ const Header = () => {
                   setActiveLink("Home");
                   setShowMobileMenu(false);
                 }}
-                className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
                   activeLink === "Home"
-                    ? "text-[#F67A08]"
-                    : "text-gray-700 hover:text-[#F67A08]"
+                    ? "text-saffron"
+                    : "text-ink hover:text-saffron"
                 }`}
               >
                 Home
@@ -509,8 +507,8 @@ const Header = () => {
                     }}
                     className={`text-sm font-medium transition-colors ${
                       activeLink === "Food Menu"
-                        ? "text-[#F67A08]"
-                        : "text-gray-700 hover:text-[#F67A08]"
+                        ? "text-saffron"
+                        : "text-ink hover:text-saffron"
                     }`}
                   >
                     Food Menu
@@ -520,7 +518,7 @@ const Header = () => {
                       e.stopPropagation();
                       setShowFoodMenu(!showFoodMenu);
                     }}
-                    className="p-1 text-gray-700 hover:text-[#F67A08] transition-colors"
+                    className="p-1 text-ink hover:text-saffron transition-colors"
                   >
                     <svg
                       className="w-4 h-4"
@@ -540,7 +538,7 @@ const Header = () => {
 
                 {/* Food Menu Dropdown in Mobile */}
                 {showFoodMenu && (
-                  <div className="bg-gray-50 border-t border-gray-200">
+                  <div className="border-t border-gold/30 bg-cream/60">
                     {FOOD_MENU_ITEMS.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
                         item.name,
@@ -553,7 +551,7 @@ const Header = () => {
                             event.stopPropagation();
                             handleFoodMenuItemClick(event, item.name);
                           }}
-                          className="block px-8 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+                          className="block px-8 py-2.5 text-sm text-ink-muted transition-colors hover:bg-cream hover:text-maroon"
                         >
                           {item.name}
                         </Link>
@@ -577,10 +575,10 @@ const Header = () => {
                     setActiveLink(link.name);
                     setShowMobileMenu(false);
                   }}
-                  className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
                     activeLink === link.name
-                      ? "text-[#F67A08]"
-                      : "text-gray-700 hover:text-[#F67A08]"
+                      ? "text-saffron"
+                      : "text-ink hover:text-saffron"
                   }`}
                 >
                   {link.name}

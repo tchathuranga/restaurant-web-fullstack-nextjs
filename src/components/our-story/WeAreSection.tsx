@@ -13,12 +13,11 @@ const lora = Lora({
 
 const WeAreSection = () => {
     return (
-        <div className="lg:px-30 md:px-20 sm:px-10 px-10 py-12 mx-auto">
+        <div className="mx-auto px-6 py-12 sm:px-10 md:px-20 lg:px-30">
             <div className="container mx-auto max-w-7xl">
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-                    {/* Left Column - Image Grid */}
-                    <div className="w-full lg:w-2/5 flex-shrink-0 lg:pt-10">
-                        <div className="relative w-full aspect-square rounded-lg overflow-hidden">
+                <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-12">
+                    <div className="w-full flex-shrink-0 lg:w-2/5 lg:pt-10">
+                        <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-gold/30 shadow-lg">
                             <Image
                                 src="/images/we-are-section.png"
                                 alt="Samosas, flatbreads, thali, and biryani dishes"
@@ -31,13 +30,14 @@ const WeAreSection = () => {
 
                     {/* Right Column - Text Content */}
                     <div className="w-full lg:w-3/5 flex flex-col lg:pt-0">
+                        <p className="sv-eyebrow">Our story</p>
                         <h2
-                            className={` font-bold text-gray-900  py-6 ${lora.className}`} style={{ fontSize: '34px' }}
+                            className={`sv-heading py-4 ${lora.className}`} style={{ fontSize: '34px' }}
                         >
                             We Are,
                         </h2>
 
-                        <div className={`text-gray-700 text-base md:text-sm leading-relaxed mb-8 space-y-4 ${notoSans.className}`}>
+                        <div className={`mb-8 space-y-4 text-base leading-relaxed text-ink-muted md:text-sm ${notoSans.className}`}>
                             <p>
                                 A Legacy of Authentic Indian Vegetarian Excellence
                             </p>

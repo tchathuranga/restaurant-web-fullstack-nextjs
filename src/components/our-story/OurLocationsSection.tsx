@@ -107,10 +107,10 @@ export default function OurLocationsSection() {
     };
 
     return (
-        <div className="lg:px-30 md:px-20 sm:px-10 px-10 py-12 mx-auto">
-            {/* Header with light blue highlight */}
-            <div className="text-center mb-8">
-                <h2 className={`px-10 font-bold text-gray-900 text-center py-6 ${lora.className}`} style={{ fontSize: '34px' }}>
+        <div className="sv-band mx-auto px-6 py-12 sm:px-10 md:px-20 lg:px-30">
+            <div className="mb-8 text-center">
+                <p className="sv-eyebrow">Visit us</p>
+                <h2 className={`sv-heading py-4 ${lora.className}`} style={{ fontSize: '34px' }}>
                     Our Locations
                 </h2>
             </div>
@@ -121,7 +121,7 @@ export default function OurLocationsSection() {
                 {canScrollLeft && (
                     <button
                         onClick={() => scroll('left')}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                        className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-gold/40 bg-ivory p-2 shadow-lg hover:bg-cream"
                         aria-label="Scroll left"
                     >
                         <ChevronLeft className="w-6 h-6 text-gray-700" />
@@ -141,28 +141,28 @@ export default function OurLocationsSection() {
                     {branches.map((branch) => (
                         <div
                             key={branch.id}
-                            className="bg-white rounded-lg shadow-md p-6 flex-shrink-0 w-85"
+                            className="sv-card w-85 flex-shrink-0 p-6"
                         >
                             {/* Location */}
                             <div className="flex items-start mb-3">
-                                <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                                <span className={`text-gray-700 ${notoSans.className}`} style={{ fontSize: '16px' }}>
+                                <MapPin className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-saffron" />
+                                <span className={`text-ink ${notoSans.className}`} style={{ fontSize: '16px' }}>
                                     {branch.address}
                                 </span>
                             </div>
 
                             {/* Operating Hours */}
                             <div className="flex items-start mb-3">
-                                <Clock className="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                                <span className={`text-gray-700 ${notoSans.className}`} style={{ fontSize: '16px' }}>
+                                <Clock className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-saffron" />
+                                <span className={`text-ink ${notoSans.className}`} style={{ fontSize: '16px' }}>
                                     {branch.hours}
                                 </span>
                             </div>
 
                             {/* Phone Number */}
                             <div className="flex items-start">
-                                <Phone className="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                                <span className={`text-gray-700 ${notoSans.className}`} style={{ fontSize: '16px' }}>
+                                <Phone className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-saffron" />
+                                <span className={`text-ink ${notoSans.className}`} style={{ fontSize: '16px' }}>
                                     {branch.phone}
                                 </span>
                             </div>
@@ -174,7 +174,7 @@ export default function OurLocationsSection() {
                 {canScrollRight && (
                     <button
                         onClick={() => scroll('right')}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                        className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-gold/40 bg-ivory p-2 shadow-lg hover:bg-cream"
                         aria-label="Scroll right"
                     >
                         <ChevronRight className="w-6 h-6 text-gray-700" />

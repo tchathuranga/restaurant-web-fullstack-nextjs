@@ -37,12 +37,13 @@ const specialties: Specialty[] = [
 
 const OurSpecialtiesSection = () => {
   return (
-    <div className="lg:px-30 md:px-20 sm:px-10 px-10 py-10 mx-auto" style={{ backgroundColor: '#F4BD50' }}>
+    <div className="sv-band mx-auto px-6 py-10 sm:px-10 md:px-20 lg:px-30">
       
       {/* Content */}
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Title */}
-        <h2 className={` font-bold text-gray-900 text-center pb-6 ${lora.className}`} style={{ fontSize: '34px' }}>
+        <p className="sv-eyebrow text-center">From every region</p>
+        <h2 className={`sv-heading pb-6 text-center ${lora.className}`} style={{ fontSize: '34px' }}>
           Our Specialties
         </h2>
 
@@ -54,7 +55,7 @@ const OurSpecialtiesSection = () => {
               className="flex flex-col items-center text-center"
             >
               {/* Circular Image */}
-              <div className="relative w-30 h-30 md:w-35 md:h-35 lg:w-40 lg:h-40 rounded-full overflow-hidden shadow-lg mb-4 md:mb-6 border-4 border-white">
+              <div className="relative mb-4 h-30 w-30 overflow-hidden rounded-full border-4 border-gold/50 shadow-lg md:mb-6 md:h-35 md:w-35 lg:h-40 lg:w-40">
                 <Image
                   src={specialty.image}
                   alt={specialty.title}
@@ -66,7 +67,7 @@ const OurSpecialtiesSection = () => {
               
               {/* Title */}
               <h3 
-                className={`text-base md:text-md lg:text-md font-semibold text-gray-900 ${notoSans.className}`}
+                className={`sv-heading text-base ${notoSans.className}`}
               >
                 {specialty.title}
               </h3>

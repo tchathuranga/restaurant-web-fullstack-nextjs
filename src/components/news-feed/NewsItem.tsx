@@ -38,11 +38,11 @@ const NewsItem = ({
     setIsDialogOpen(false);
   };
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 md:p-6 lg:p-8 mb-6 last:mb-0">
+    <div className="sv-card mb-6 p-4 last:mb-0 md:p-6 lg:p-8">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 lg:gap-10">
         {/* Left side - Image */}
         <div className="w-full md:w-1/2 lg:w-2/5 flex-shrink-0">
-          <div className="relative aspect-[4/3] max-w-md mx-auto md:mx-0 rounded-lg overflow-hidden">
+          <div className="relative mx-auto aspect-[4/3] max-w-md overflow-hidden rounded-2xl border border-gold/30 md:mx-0">
             <Image
               src={image}
               alt={imageAlt || title}
@@ -57,14 +57,14 @@ const NewsItem = ({
         <div className="w-full md:w-1/2 lg:w-3/5 flex flex-col py-10 justify-center md:justify-start">
           {/* Title */}
           <h3
-            className={`text-xl sm:text-2xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 ${lora.className}`}
+            className={`sv-heading mb-3 text-xl sm:text-2xl md:mb-4 ${lora.className}`}
           >
             {title}
           </h3>
 
           {/* Description */}
           <div
-            className={`text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-5 line-clamp-3 ${notoSans.className}`}
+            className={`mb-4 line-clamp-3 text-sm leading-relaxed text-ink-muted md:mb-5 md:text-base ${notoSans.className}`}
             dangerouslySetInnerHTML={{ __html: description }}
           />
 
@@ -72,7 +72,7 @@ const NewsItem = ({
           <div>
             <button
               onClick={handleSeeMore}
-              className={`inline-flex items-center text-[#F67A08] hover:text-[#E5690A] font-medium text-sm md:text-base transition-colors duration-200 group cursor-pointer ${notoSans.className}`}
+              className={`group inline-flex cursor-pointer items-center text-sm font-medium text-saffron transition-colors duration-200 hover:text-saffron-deep md:text-base ${notoSans.className}`}
             >
               see more...
               <svg

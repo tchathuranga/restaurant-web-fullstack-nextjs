@@ -94,15 +94,16 @@ export default function ApplyJob({ jobTitle }: ApplyJobProps) {
     };
 
     return (
-        <div className="bg-white lg:px-30 md:px-20 sm:px-10 px-6 pb-6 mx-auto">
-            <h2 className={`font-bold text-gray-900 text-center py-4 ${lora.className}`} style={{ fontSize: '34px' }}>
+        <div className="mx-auto px-6 pb-8 sm:px-10 md:px-20 lg:px-30">
+            <p className="sv-eyebrow text-center">Join the family</p>
+            <h2 className={`sv-heading py-4 text-center ${lora.className}`} style={{ fontSize: '34px' }}>
                 Apply For This Job
             </h2>
 
-            <form onSubmit={handleSubmit} className="max-w-3xl mx-auto rounded-xl px-4 sm:px-8 py-6 space-y-4">
+            <form onSubmit={handleSubmit} className="sv-card mx-auto max-w-3xl space-y-4 px-4 py-6 sm:px-8">
                 {fields.map((field) => (
                     <div key={field.id} className="flex flex-col">
-                        <label htmlFor={field.id} className={`text-sm text-gray-500 mb-2 ${notoSans.className}`}>
+                        <label htmlFor={field.id} className={`mb-2 text-sm text-ink-muted ${notoSans.className}`}>
                             {field.label}
                         </label>
                         <input
@@ -111,19 +112,19 @@ export default function ApplyJob({ jobTitle }: ApplyJobProps) {
                             type={field.type}
                             placeholder={field.placeholder}
                             required
-                            className={`w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-200 bg-white text-gray-900 placeholder-gray-400 ${notoSans.className}`}
+                            className={`sv-input ${notoSans.className}`}
                         />
                     </div>
                 ))}
 
                 <div className="flex flex-col">
-                    <span className={`text-sm text-gray-500 mb-2 ${notoSans.className}`}>Resume</span>
+                    <span className={`mb-2 text-sm text-ink-muted ${notoSans.className}`}>Resume</span>
                     <div
-                        className="border-2 border-dashed border-gray-300 rounded-xl py-8 px-4 flex flex-col items-center justify-center text-center bg-gray-50"
+                        className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gold/50 bg-cream/50 px-4 py-8 text-center"
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
                     >
-                        <UploadCloud className="w-10 h-10 text-gray-500 mb-3" />
+                        <UploadCloud className="mb-3 h-10 w-10 text-saffron" />
                         <input
                             type="file"
                             accept=".pdf,.doc,.docx,.txt,.rtf,.odt,.jpg,.jpeg,.png,.webp,.zip"
@@ -131,20 +132,20 @@ export default function ApplyJob({ jobTitle }: ApplyJobProps) {
                             ref={fileInputRef}
                             onChange={handleFileChange}
                         />
-                        <p className={`text-gray-600 ${notoSans.className}`}>
+                        <p className={`text-ink-muted ${notoSans.className}`}>
                             Drag and drop your resume here or{' '}
-                            <button type="button" className="text-orange-500 underline" onClick={handleBrowseClick}>
+                            <button type="button" className="text-saffron underline" onClick={handleBrowseClick}>
                                 Browse Files
                             </button>
                         </p>
                         {resumeFile && (
-                            <span className="mt-2 text-green-600 text-sm">Selected: {resumeFile.name}</span>
+                            <span className="mt-2 text-sm text-peacock">Selected: {resumeFile.name}</span>
                         )}
                     </div>
                 </div>
 
                 {status && (
-                    <p className={`text-center ${status.includes('Error') ? 'text-red-600' : 'text-green-600'} ${notoSans.className}`}>
+                    <p className={`text-center ${status.includes('Error') ? 'text-maroon' : 'text-peacock'} ${notoSans.className}`}>
                         {status}
                     </p>
                 )}
@@ -152,7 +153,7 @@ export default function ApplyJob({ jobTitle }: ApplyJobProps) {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full bg-[#F36A3A] text-white font-semibold py-3 rounded-lg hover:bg-[#e35f31] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed ${notoSans.className}`}
+                    className={`sv-btn w-full disabled:cursor-not-allowed disabled:opacity-60 ${notoSans.className}`}
                 >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
                 </button>

@@ -87,15 +87,16 @@ export default function FutureJobs() {
     };
 
     return (
-      <div className="bg-white lg:px-30 md:px-20 sm:px-10 px-6 pb-6 mx-auto">
+      <div className="mx-auto px-6 pb-8 sm:px-10 md:px-20 lg:px-30">
+        <p className="sv-eyebrow pt-8 text-center">Stay in touch</p>
         <h2
-          className={`font-bold text-gray-900 text-center py-10 ${lora.className}`}
+          className={`sv-heading py-6 text-center ${lora.className}`}
           style={{ fontSize: "34px" }}
         >
           Future Opportunities
         </h2>
         <p
-          className={`text-center text-gray-600 max-w-2xl mx-auto pb-6 ${notoSans.className}`}
+          className={`mx-auto max-w-2xl pb-6 text-center text-ink-muted ${notoSans.className}`}
           style={{ fontSize: "16px" }}
         >
           Join our talent pool for future opportunities at Sri Vihar Restaurant.
@@ -103,13 +104,13 @@ export default function FutureJobs() {
 
         <form
           onSubmit={handleSubmit}
-          className="max-w-3xl mx-auto rounded-xl px-4 sm:px-8 py-6 space-y-4"
+          className="sv-card mx-auto max-w-3xl space-y-4 px-4 py-6 sm:px-8"
         >
           {fields.map((field) => (
             <div key={field.id} className="flex flex-col">
               <label
                 htmlFor={field.id}
-                className={`text-sm text-gray-500 mb-2 ${notoSans.className}`}
+                className={`mb-2 text-sm text-ink-muted ${notoSans.className}`}
               >
                 {field.label}
               </label>
@@ -119,23 +120,23 @@ export default function FutureJobs() {
                 type={field.type}
                 placeholder={field.placeholder}
                 required
-                className={`w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-200 bg-white text-gray-900 placeholder-gray-400 ${notoSans.className}`}
+                className={`sv-input ${notoSans.className}`}
               />
             </div>
           ))}
 
           <div className="flex flex-col">
             <span
-              className={`text-sm text-gray-500 mb-2 ${notoSans.className}`}
+              className={`mb-2 text-sm text-ink-muted ${notoSans.className}`}
             >
               Resume
             </span>
             <div
-              className="border-2 border-dashed border-gray-300 rounded-xl py-8 px-4 flex flex-col items-center justify-center text-center bg-gray-50"
+              className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gold/50 bg-cream/50 px-4 py-8 text-center"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >
-              <UploadCloud className="w-10 h-10 text-gray-500 mb-3" />
+              <UploadCloud className="mb-3 h-10 w-10 text-saffron" />
               <input
                 type="file"
                 accept=".pdf,.doc,.docx,.txt,.rtf,.odt,.jpg,.jpeg,.png,.webp,.zip"
@@ -143,11 +144,11 @@ export default function FutureJobs() {
                 ref={fileInputRef}
                 onChange={handleFileChange}
               />
-              <p className={`text-gray-600 ${notoSans.className}`}>
+              <p className={`text-ink-muted ${notoSans.className}`}>
                 Drag and drop your resume here or{" "}
                 <button
                   type="button"
-                  className="text-orange-500 underline"
+                  className="text-saffron underline"
                   onClick={handleBrowseClick}
                 >
                   Browse Files
@@ -174,7 +175,7 @@ export default function FutureJobs() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full bg-[#F36A3A] text-white font-semibold py-3 rounded-lg hover:bg-[#e35f31] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed ${notoSans.className}`}
+            className={`sv-btn w-full disabled:cursor-not-allowed disabled:opacity-60 ${notoSans.className}`}
           >
             {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>

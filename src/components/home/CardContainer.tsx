@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { PaisleyCorner } from '../common/IndianMotifs';
 
 export interface CardContainerProps {
     cards: Card[];
@@ -14,23 +15,24 @@ export interface Card {
 
 const CardContainer = ({ cards }: CardContainerProps) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card, idx) => (
         <div
           key={idx}
-          className="bg-white rounded-lg shadow-sm p-7 flex flex-col items-center text-center"
+          className="sv-card group relative overflow-hidden p-7 text-center transition-transform duration-300 hover:-translate-y-1"
         >
+          <PaisleyCorner className="absolute right-3 top-3 h-8 w-8 rotate-90 text-gold/50" />
           <Image
             src={card.icon}
             alt={card.imageAlt || card.title}
             width={40}
             height={40}
-            className="mb-4 w-10 h-10 object-contain"
+            className="mx-auto mb-4 h-10 w-10 object-contain"
           />
-          <h3 className="font-semibold text-lg mb-2 text-gray-900">
+          <h3 className="sv-heading mb-2 text-xl">
             {card.title}
           </h3>
-          <p className="text-gray-500 text-sm">{card.desc}</p>
+          <p className="text-sm leading-relaxed text-ink-muted">{card.desc}</p>
         </div>
       ))}
     </div>

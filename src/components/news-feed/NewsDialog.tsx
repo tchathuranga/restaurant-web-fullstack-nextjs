@@ -64,22 +64,22 @@ const NewsDialog = ({
 
       {/* Dialog Content with gradient, border, and animation */}
       <div 
-        className="relative bg-white border-2 border-orange-200 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10 animate-modalIn"
+        className="sv-card animate-modalIn relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white shadow-lg hover:bg-orange-100 border border-orange-200 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="absolute top-4 right-4 z-20 rounded-full border border-gold/40 bg-ivory p-2 shadow-lg transition-colors hover:bg-cream"
           aria-label="Close dialog"
         >
-          <X className="w-6 h-6 text-orange-500" />
+          <X className="h-6 w-6 text-saffron" />
         </button>
 
         {/* Content */}
         <div className="p-4 sm:p-8 flex flex-col items-center">
           {/* Image */}
-          <div className="relative w-full aspect-[16/9] mb-6 rounded-xl overflow-hidden border-2 border-orange-100 shadow-md">
+          <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-xl border border-gold/30 shadow-md">
             <Image
               src={image}
               alt={imageAlt || title}
@@ -91,18 +91,18 @@ const NewsDialog = ({
 
           {/* Title */}
           <h2 
-            className={`text-2xl md:text-3xl lg:text-3xl font-extrabold text-gray-900 mb-4 md:mb-6 drop-shadow-sm text-center  ${lora.className}`}
+            className={`sv-heading mb-4 text-center text-2xl md:mb-6 md:text-3xl ${lora.className}`}
           >
             {title}
           </h2>
 
           <div 
-              className={`text-gray-700 text-base md:text-lg leading-relaxed text-justify   ${notoSans.className}`}
+              className={`text-justify text-base leading-relaxed text-ink-muted md:text-lg ${notoSans.className}`}
               dangerouslySetInnerHTML={{ __html: description }}
             />
           <button
             onClick={onClose}
-            className="mt-8 px-6 py-2 rounded-full bg-[#F67A08] text-white font-semibold shadow hover:bg-orange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="sv-btn mt-8"
           >
             Close
           </button>

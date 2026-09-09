@@ -174,7 +174,7 @@ function FoodMenuContent() {
         }}
       />
 
-      <div className="sticky top-0 z-100 bg-[#F5E6D8]">
+      <div className="sticky top-0 z-100">
         <FilterBar
           activeIndex={selectedFilterIndex}
           onSelect={handleFilterSelect}
@@ -185,13 +185,13 @@ function FoodMenuContent() {
       </div>
       <div className="px-4 md:px-10 pb-10">
         {error && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-red-600 text-lg">{error}</p>
+          <div className="sv-card my-6 px-4 py-8 text-center">
+            <p className="text-lg text-maroon">{error}</p>
           </div>
         )}
         {loading && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-red-600 text-lg">Loading Items</p>
+          <div className="sv-card my-6 px-4 py-8 text-center">
+            <p className="text-lg text-ink-muted">Loading items...</p>
           </div>
         )}
         {sections.map((section, index) => (
