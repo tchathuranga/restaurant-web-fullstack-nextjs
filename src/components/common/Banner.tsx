@@ -59,9 +59,12 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
   return (
-    <div className="relative w-full max-h-[95vh] sm:max-h-[80vh] overflow-hidden">
-      {/* Slider Images */}
-      <div className="relative w-full h-auto">
+    <div className="relative w-full max-h-[95vh] overflow-hidden sm:max-h-[80vh]">
+      {/* <div className="pointer-events-none absolute inset-x-8 top-4 z-20 hidden h-8 opacity-50 sm:block" style={{
+        backgroundImage: "radial-gradient(circle, #E8C36A 1.3px, transparent 1.7px)",
+        backgroundSize: "12px 10px",
+      }} /> */}
+      <div className="relative h-auto w-full">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -86,7 +89,7 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-20"
+            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-maroon/70 p-2.5 text-ivory transition-all hover:bg-saffron"
             aria-label="Previous slide"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +99,7 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-20"
+            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-maroon/70 p-2.5 text-ivory transition-all hover:bg-saffron"
             aria-label="Next slide"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,8 +116,8 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
+              className={`h-2.5 w-2.5 rounded-full transition-all ${
+                index === currentSlide ? 'bg-gold-soft scale-125' : 'bg-ivory/50'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -124,49 +127,44 @@ const Banner = ({ content, singleImage, sliderImages }: BannerProps) => {
 
       {/* Content Overlay - Only show if content is provided */}
       {content && (
-        <div className="absolute inset-0 flex items-center justify-center px-4 z-10">
-          <div className="text-center text-white max-w-4xl w-full">
-            {/* Title */}
+        <div className="banner-vignette absolute inset-0 z-10 flex items-center justify-center px-4">
+          <div className="w-full max-w-4xl text-center text-ivory">
             {content.title && (
-              <h1 
-                className={`mb-4 lg:mb-6 ${content.titleFontSize} ${content.titleFont?.className} bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]`}
-                style={{ 
-                  fontSize: 'clamp(32px, 6vw, 54px)',
-                  lineHeight: '1.15',
-                  letterSpacing: '1px',
-                  textShadow: '0 2px 12px rgba(0,0,0,0.18), 0 1px 0 #fff'
+              <h1
+                className={`mb-4 font-display lg:mb-6 ${content.titleFontSize} ${content.titleFont?.className}`}
+                style={{
+                  fontSize: "clamp(34px, 6vw, 58px)",
+                  lineHeight: "1.15",
+                  letterSpacing: "1px",
+                  color: "#F8EDE3",
+                  textShadow: "0 3px 18px rgba(44,24,16,0.45)",
                 }}
               >
                 {content.title}
               </h1>
             )}
 
-            {/* Subtitle */}
             {content.subtitle && (
-              <p 
-                className={`mb-6 lg:mb-8 opacity-95 ${content.subtitleFont?.className} px-4 py-2 rounded-xl inline-block bg-white/20 backdrop-blur-sm shadow-md text-shadow-lg`}
-                style={{ 
-                  fontSize: 'clamp(18px, 3vw, 24px)',
-                  lineHeight: '1.4',
-                  color: '#fff',
-                  textShadow: '0 2px 8px rgba(0,0,0,0.18)'
+              <p
+                className={`mb-6 inline-block rounded-full border border-gold/40 bg-maroon/35 px-5 py-2.5 backdrop-blur-sm lg:mb-8 ${content.subtitleFont?.className}`}
+                style={{
+                  fontSize: "clamp(16px, 2.6vw, 22px)",
+                  lineHeight: "1.45",
+                  color: "#FFF8F0",
                 }}
               >
                 {content.subtitle}
               </p>
             )}
-            
-            {/* Buttons */}
+
             {content.buttons && content.buttons.length > 0 && (
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                 {content.buttons.map((button, index) => (
                   <a
                     key={index}
                     href={button.href}
-                    className={`px-6 py-3 rounded-md text-sm sm:text-base font-semibold transition-colors text-center w-full sm:w-auto ${
-                      button.variant === 'primary'
-                        ? 'bg-[#F67A08] text-white hover:bg-[#E5690A]'
-                        : 'bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900'
+                    className={`w-full text-center text-sm font-semibold sm:w-auto sm:text-base ${
+                      button.variant === "primary" ? "sv-btn" : "sv-btn-outline border-ivory text-ivory"
                     }`}
                   >
                     {button.text}

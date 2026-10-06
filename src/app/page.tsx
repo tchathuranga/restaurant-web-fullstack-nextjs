@@ -7,7 +7,7 @@ import PopularDishes from "@/components/home/PopularDishes";
 import OurValues from "@/components/home/OurValues";
 import FreqQuestion from "@/components/home/FreqQuestion";
 import Promotions from "@/components/home/Promotions";
-import { Kalam, Noto_Sans } from "next/font/google";
+import { Kalam } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
 import { getAllNews } from "@/services/newsService";
 import { NewsProps } from "@/interfaces/news";
@@ -16,11 +16,6 @@ import { PromotionProps } from "@/interfaces/promotions";
 
 const kalam = Kalam({
   weight: ["300", "400", "700"],
-  subsets: ["latin"],
-});
-
-const notoSans = Noto_Sans({
-  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -84,7 +79,6 @@ export default function Home() {
           subtitle:
             "Experience the rich flavors of traditional South Indian dishes",
           titleFont: kalam,
-          subtitleFont: notoSans,
           titleFontSize: "font-bold",
         }}
       />

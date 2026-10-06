@@ -1,21 +1,11 @@
 "use client";
 
-import { Noto_Sans, Lora } from "next/font/google";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import ItemContainer from "../common/ItemContainer";
 import { ItemProps } from "@/interfaces/Items";
 import { fetchAllItems } from "@/services/ItemService";
-
-const lora = Lora({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
-
-const notoSans = Noto_Sans({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+import SectionHeading from "../common/SectionHeading";
 
 const PopularDishes = () => {
   const [selectedDish, setSelectedDish] = useState(0);
@@ -51,7 +41,7 @@ const PopularDishes = () => {
   );
 
   return (
-    <div className="px-4 md:px-10 lg:px-30 pb-20">
+    <div className="relative px-4 pb-20 md:px-10 lg:px-30">
       {/* Bottom Left Background Image */}
       <Image
         src="/images/mandala-bottom-left-icon.png"
@@ -71,34 +61,29 @@ const PopularDishes = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center">
-        <h2
-          className={`px-2 md:px-10 font-bold text-gray-900 py-6 md:py-10 ${lora.className}`}
-          style={{ fontSize: "28px" }}
-        >
-          Popular Dishes
-        </h2>
+        <SectionHeading
+          className="py-8 md:py-12"
+          eyebrow="From our kitchen"
+          title="Popular Dishes"
+          subtitle="A taste of our most-loved North Indian, South Indian, and sweet specialties."
+        />
 
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-10">
+        <div className="mb-6 flex flex-wrap justify-center gap-2 md:mb-10 md:gap-4">
           {error && (
-            <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-              <p className="text-red-600 text-lg">{error}</p>
+            <div className="sv-card px-4 py-6 text-center">
+              <p className="text-lg text-maroon">{error}</p>
             </div>
           )}
           {loading && (
-            <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-              <p className="text-red-600 text-lg">Loading Items</p>
+            <div className="sv-card px-4 py-6 text-center">
+              <p className="text-lg text-ink-muted">Loading items...</p>
             </div>
           )}
           {dishes.map((dish, index) => (
             <button
               key={dish}
               onClick={() => setSelectedDish(index)}
-              className={`px-4 py-2 rounded-full text-sm md:text-base font-small transition-colors duration-200 shadow-lg ${notoSans.className}  ${
-                selectedDish === index
-                  ? "bg-[#F67A08] text-white border-[#F67A08] hover:bg-[#E5690A] hover:border-[#E5690A]"
-                  : "bg-white text-black hover:bg-gray-100"
-              }`}
-              style={{ fontSize: "15px" }}
+              className={`sv-chip ${selectedDish === index ? "sv-chip-active" : ""}`}
             >
               {dish}
             </button>

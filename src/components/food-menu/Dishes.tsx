@@ -55,27 +55,8 @@ export default function Dishes({
   return (
     <div className="lg:px-30 md:px-20 sm:px-10 pt-10">
       <div className="mx-auto max-w-7xl px-2 md:px-6">
-        <div className="relative overflow-hidden rounded-[1.45rem] bg-gradient-to-b from-[#FFF6E4] via-[#F5E6D8] to-[#EFD9B8] px-6 py-8 text-center sm:px-12">
-            <Image
-              src="/images/decorative/mandala-icon-left.png"
-              alt=""
-              width={140}
-              height={140}
-              className="pointer-events-none absolute -left-6 top-1/2 hidden h-36 w-36 -translate-y-1/2 opacity-25 sm:block"
-            />
-            <Image
-              src="/images/decorative/mandala-icon-right.png"
-              alt=""
-              width={140}
-              height={140}
-              className="pointer-events-none absolute -right-6 top-1/2 hidden h-36 w-36 -translate-y-1/2 opacity-25 sm:block"
-            />
-
-            <PaisleyCorner className="absolute left-3 top-3 h-10 w-10 text-[#C49A3C] sm:left-5 sm:top-5" />
-            <PaisleyCorner className="absolute right-3 top-3 h-10 w-10 rotate-90 text-[#C49A3C] sm:right-5 sm:top-5" />
-            <PaisleyCorner className="absolute bottom-3 left-3 h-10 w-10 -rotate-90 text-[#C49A3C] sm:bottom-5 sm:left-5" />
-            <PaisleyCorner className="absolute bottom-3 right-3 h-10 w-10 rotate-180 text-[#C49A3C] sm:bottom-5 sm:right-5" />
-
+        <div className="sv-card relative overflow-hidden px-6 py-8 text-center sm:px-12">
+          
             <MandalaRing className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 text-[#F67A08]/15" />
 
             <p
@@ -90,44 +71,48 @@ export default function Dishes({
               {title}
             </h2>
             <OrnamentDivider className="relative mt-4" />
-            <p className={`relative mt-3 text-xl text-[#A34A0F] ${caveat.className}`}>
-              {groupedSubcategories.length}{" "}
-              {groupedSubcategories.length === 1 ? "specialty" : "specialties"} from our kitchen
-            </p>
+             
         </div>
       </div>
 
       {hasItems ? (
-        <div className="mx-auto mt-8 flex max-w-7xl flex-col gap-8 px-2 md:px-6">
-          {groupedSubcategories.map((subcategory) => {
-            const subcategoryItems = itemsToRender.filter(
-              (item) =>
-                (item.subcategory || getSubcategory(item.title, item.category)) ===
-                subcategory
-            );
+        <div className="mx-auto mt-8 max-w-7xl grid-cols-1 gap-8 px-2 md:grid-cols-1 md:px-6">
+          {groupedSubcategories
+            .map((subcategory) => ({
+              subcategory,
+              items: itemsToRender.filter(
+                (item) =>
+                  (item.subcategory || getSubcategory(item.title, item.category)) ===
+                  subcategory
+              ),
+            }))
+            .filter(({ items }) => items.length > 0)
+            .map(({ subcategory, items }, index, visible) => {
+              const isOddLeftover =
+                visible.length % 2 === 1 && index === visible.length - 1;
+              const isHalfWidth = !isOddLeftover;
 
-            if (subcategoryItems.length === 0) return null;
-
-            return (
-              <div
-                key={`${title}-${subcategory}`}
-                ref={(el) => {
-                  if (subcategoryRefs) {
-                    subcategoryRefs.current[`${title}::${subcategory}`] = el;
-                  }
-                }}
-                className="scroll-mt-40"
-              >
-                <SubcategoryShowcase
-                  category={title}
-                  subcategory={subcategory}
-                  items={subcategoryItems}
-                  isExpanded={expandedSubcategory === subcategory}
-                  onToggle={() => onSubcategoryToggle?.(subcategory)}
-                />
-              </div>
-            );
-          })}
+              return (
+                <div
+                  key={`${title}-${subcategory}`}
+                  ref={(el) => {
+                    if (subcategoryRefs) {
+                      subcategoryRefs.current[`${title}::${subcategory}`] = el;
+                    }
+                  }}
+                  className={`scroll-mt-40 ${isHalfWidth ? "" : "md:col-span-2"}`}
+                >
+                  <SubcategoryShowcase
+                    category={title}
+                    subcategory={subcategory}
+                    items={items}
+                    isExpanded={expandedSubcategory === subcategory}
+                    onToggle={() => onSubcategoryToggle?.(subcategory)}
+                     
+                  />
+                </div>
+              );
+            })}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-20 max-w-7xl mx-auto p-10">

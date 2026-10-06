@@ -17,19 +17,19 @@ export default function BookingAndInquiries() {
     const router = useRouter();
     
     return (
-      <div className="lg:px-30 md:px-20 sm:px-10 px-10 mx-auto">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-7xl mx-auto">
-          {/* Left Side - Text Content */}
-          <div className="flex-1 w-full lg:w-auto">
+      <div className="mx-auto px-6 py-10 sm:px-10 md:px-20 lg:px-30">
+        <div className="sv-card mx-auto flex max-w-7xl flex-col items-center gap-8 p-6 lg:flex-row lg:gap-12 lg:p-10">
+          <div className="w-full flex-1 lg:w-auto">
+            <p className="sv-eyebrow mb-2">Plan your event</p>
             <h2
-              className={`font-bold text-gray-800 mb-6 ${lora.className}`}
+              className={`sv-heading mb-6 ${lora.className}`}
               style={{ fontSize: "34px" }}
             >
               Booking & Inquiries
             </h2>
 
             <p
-              className={`text-gray-600 mb-6 ${notoSans.className}`}
+              className={`mb-6 text-ink-muted ${notoSans.className}`}
               style={{ fontSize: "16px" }}
             >
               We recommend booking your catering at least 1-2 weeks in advance
@@ -39,20 +39,20 @@ export default function BookingAndInquiries() {
             {/* Contact Information */}
             <div className="space-y-4 mb-6">
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-gray-700" strokeWidth={2} />
+                <Phone className="h-5 w-5 text-saffron" strokeWidth={2} />
                 <a
                   href="tel:+941123456789"
-                  className={`text-gray-700 ${notoSans.className}`}
+                  className={`text-ink ${notoSans.className}`}
                   style={{ fontSize: "16px" }}
                 >
                   +94 11 2345 6789
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-gray-700" strokeWidth={2} />
+                <Mail className="h-5 w-5 text-saffron" strokeWidth={2} />
                 <a
                   href="mailto:info@srivihar.lk"
-                  className={`text-gray-700 ${notoSans.className}`}
+                  className={`text-ink ${notoSans.className}`}
                   style={{ fontSize: "16px" }}
                 >
                   info@srivihar.lk
@@ -61,7 +61,7 @@ export default function BookingAndInquiries() {
             </div>
 
             <p
-              className={`text-gray-600 mb-6 ${notoSans.className}`}
+              className={`mb-6 text-ink-muted ${notoSans.className}`}
               style={{ fontSize: "16px" }}
             >
               Or fill out our simple Inquiry Form and we&apos;ll get back to you
@@ -70,11 +70,7 @@ export default function BookingAndInquiries() {
 
             {/* Contact Us Button */}
             <button
-              className={`px-8 py-3 rounded-lg border-2 font-semibold uppercase tracking-wide transition-colors ${notoSans.className}`}
-              style={{
-                borderColor: "#F67A08",
-                color: "#F67A08",
-              }}
+              className={`sv-btn-outline uppercase tracking-wide ${notoSans.className}`}
               onClick={() => router.push("/contact-us#send-message")}
             >
               CONTACT US

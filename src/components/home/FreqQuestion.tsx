@@ -1,19 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Noto_Sans, Lora } from 'next/font/google';
 import { ChevronDown } from 'lucide-react';
 import Image from "next/image";
-
-const lora = Lora({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-});
-
-const notoSans = Noto_Sans({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-});
+import SectionHeading from '../common/SectionHeading';
 
 interface FAQItem {
   question: string;
@@ -53,7 +43,7 @@ export default function FreqQuestion() {
   return (
     <div className="py-16 px-4 relative overflow-hidden">
       {/* Background Decorative Images */}
-      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
+      {/* <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
 
         <Image
             src="/images/decorative/mandala-icon-top.png"
@@ -62,35 +52,36 @@ export default function FreqQuestion() {
             height={106}
             className="absolute left-1/2 top-0 transform -translate-x-1/2 opacity-20"
         />
-      </div>
+      </div> */}
 
       {/* Content */}
       <div className="relative z-10">
-        <h2 className={`font-bold mb-12 text-gray-900 text-center ${lora.className}`} style={{ fontSize: '34px' }}>
-          Frequently Asked Questions
-        </h2>
-        <div className="max-w-3xl mx-auto space-y-4">
+        <SectionHeading
+          className="mb-12"
+          eyebrow="Helpful answers"
+          title="Frequently Asked Questions"
+        />
+        <div className="mx-auto max-w-3xl space-y-4">
           {faqData.map((item, index) => (
-            <div key={index} className="border border-gray-300 rounded-lg overflow-hidden">
+            <div key={index} className="sv-card overflow-hidden">
               <button
                 onClick={() => toggleAccordion(index)}
-                onMouseEnter={() => toggleAccordion(index)}
-                className={`w-full px-6 py-4 flex items-center justify-between ${
-                  openIndex === index ? 'bg-gray-200' : 'bg-white'
-                } hover:bg-gray-100 transition-colors`}
+                className={`flex w-full items-center justify-between px-6 py-4 text-left transition-colors ${
+                  openIndex === index ? 'bg-cream' : 'bg-ivory'
+                } hover:bg-cream`}
               >
-                <span className={`text-left font-medium text-gray-800 ${notoSans.className}`}>
+                <span className="pr-4 font-medium text-ink">
                   {item.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-600 flex-shrink-0 transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
+                  className={`h-5 w-5 flex-shrink-0 text-saffron transition-transform ${
+                    openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
               </button>
               {openIndex === index && (
-                <div className="px-6 py-4 bg-gray-100 border-t border-gray-300">
-                  <p className={`text-gray-700 ${notoSans.className}`}>{item.answer}</p>
+                <div className="border-t border-gold/30 bg-parchment px-6 py-4">
+                  <p className="text-ink-muted">{item.answer}</p>
                 </div>
               )}
             </div>

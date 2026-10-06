@@ -17,23 +17,24 @@ interface WhatsNewSectionProps {
 
 const WhatsNewSection = ({ newsItems, error, loading }: WhatsNewSectionProps) => {
   return (
-    <div className="relative py-12 md:py-16 lg:py-20" style={{ backgroundColor: '#FFFFFF' }}>
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-20 relative z-10">
+    <div className="relative py-12 md:py-16 lg:py-20">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-20">
+        <p className="sv-eyebrow text-center">From the kitchen</p>
         <h2 
-          className={`text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 md:mb-12 lg:mb-16 text-center ${lora.className}`}
+          className={`sv-heading mb-8 text-center text-2xl md:mb-12 md:text-3xl lg:mb-16 lg:text-4xl ${lora.className}`}
         >
           What&apos;s New at Sri Vihar
         </h2>
 
         {error && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-red-600 text-lg">{error}</p>
+          <div className="sv-card mb-6 px-4 py-8 text-center">
+            <p className="text-lg text-maroon">{error}</p>
           </div>
         )}
 
         {loading && (
-          <div className="text-center py-8 px-4 bg-red-50 rounded-lg">
-            <p className="text-gray-600 text-lg">Loading...</p>
+          <div className="sv-card mb-6 px-4 py-8 text-center">
+            <p className="text-lg text-ink-muted">Loading...</p>
           </div>
         )}
 

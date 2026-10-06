@@ -26,7 +26,8 @@ const BRANCHES = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#F36A3A] text-white pt-12 pb-6 overflow-hidden">
+    <footer className="relative overflow-hidden bg-gradient-to-b from-maroon to-maroon-deep pt-12 pb-6 text-ivory">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-gold via-saffron to-gold" />
       {/* decorative mandalas - place SVG/PNG in public/images */}
       <Image
         src="/images/decorative/mandala-icon-left.png"
@@ -60,7 +61,7 @@ export default function Footer() {
 
           {/* Tagline */}
           <p
-            className={`${notoSans.className} text-xs mb-5 text-white/80 leading-relaxed text-center`}
+            className={`${notoSans.className} mb-5 text-center text-xs leading-relaxed text-ivory/80`}
           >
             Authentic Indian cuisine served with love and tradition.
           </p>
@@ -292,6 +293,14 @@ export default function Footer() {
                   className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
                 >
                   Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/food-menu"
+                  className={`text-white/90 hover:text-white transition-colors ${notoSans.className}`}
+                >
+                  Food-menu
                 </a>
               </li>
               <li>

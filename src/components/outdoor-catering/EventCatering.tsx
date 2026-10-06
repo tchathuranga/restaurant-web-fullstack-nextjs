@@ -1,10 +1,5 @@
-import { Lora } from "next/font/google";
 import EventCardContainer from "./EventCardContainer";
-
-const lora = Lora({
-    weight: ['400', '500', '600', '700'],
-    subsets: ['latin'],
-});
+import SectionHeading from "../common/SectionHeading";
 
 export default function EventCatering() {
 
@@ -16,10 +11,12 @@ export default function EventCatering() {
         {icon: "/images/Event-card-icons/house-warmings.png", title: "Housewarmings & More", imageAlt: "Housewarmings & More"}
     ]
     return (
-        <div className="lg:px-30 md:px-20 sm:px-10 px-10 pb-10 mx-auto">
-            <h2 className={`px-10 font-bold text-gray-900 text-center py-6 ${lora.className}`} style={{ fontSize: '34px' }}>
-                Events We Cater To
-            </h2>
+        <div className="sv-band mx-auto px-6 pb-14 sm:px-10 md:px-20 lg:px-30">
+            <SectionHeading
+              className="py-10"
+              eyebrow="Every occasion"
+              title="Events We Cater To"
+            />
             <EventCardContainer events={eventData} />
         </div>
     )
