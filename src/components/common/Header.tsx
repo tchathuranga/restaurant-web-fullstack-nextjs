@@ -140,7 +140,7 @@ const Header = () => {
         <div className="flex justify-center">
           <Link href="/" className="cursor-pointer" onClick={() => setActiveLink("")}>
             <Image
-              src="/images/Logo.png"
+              src="/images/Logo/Logo.png"
               alt="Sri Vihar Logo"
               width={200}
               height={60}
