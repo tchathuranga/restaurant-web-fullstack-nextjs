@@ -144,7 +144,7 @@ const Header = () => {
               alt="Sri Vihar Logo"
               width={200}
               height={60}
-              className="object-contain lg:w-[380px] lg:h-[140px]"
+              className="object-contain lg:w-[300px] lg:h-[100px]"
               priority
             />
           </Link>

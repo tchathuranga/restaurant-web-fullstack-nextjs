@@ -16,6 +16,9 @@ const notoSans = Noto_Sans({
   subsets: ["latin"],
 });
 
+// Set to true to show the Facebook link in the footer
+const SHOW_FACEBOOK = false;
+
 const BRANCHES = [
   "Thummulla",
   "Nugegoda",
@@ -101,16 +104,18 @@ export default function Footer() {
               <Instagram className="w-4 h-4" strokeWidth={2.5} />
             </a> */}
 
-            <a
-              href="https://www.facebook.com/share/1DsUBgNnQk/"
-              className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:bg-white/20 hover:border-white/60 transition-all duration-200"
-            >
-              <Facebook
-                className="w-4 h-4"
-                strokeWidth={1.5}
-                fill="currentColor"
-              />
-            </a>
+            {SHOW_FACEBOOK && (
+              <a
+                href="https://www.facebook.com/share/1DsUBgNnQk/"
+                className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:bg-white/20 hover:border-white/60 transition-all duration-200"
+              >
+                <Facebook
+                  className="w-4 h-4"
+                  strokeWidth={1.5}
+                  fill="currentColor"
+                />
+              </a>
+            )}
 
             {/* <a
               href="#"
@@ -233,16 +238,18 @@ export default function Footer() {
               >
                 <Instagram className="w-4 h-4" strokeWidth={2.5} />
               </a> */}
-              <a
-                href="https://www.facebook.com/share/1DsUBgNnQk/"
-                className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
-              >
-                <Facebook
-                  className="w-4 h-4"
-                  strokeWidth={1.5}
-                  fill="currentColor"
-                />
-              </a>
+              {SHOW_FACEBOOK && (
+                <a
+                  href="https://www.facebook.com/share/1DsUBgNnQk/"
+                  className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
+                >
+                  <Facebook
+                    className="w-4 h-4"
+                    strokeWidth={1.5}
+                    fill="currentColor"
+                  />
+                </a>
+              )}
               {/* <a
                 href="#"
                 className="w-9 h-9 rounded-full border border-white/80 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors"
