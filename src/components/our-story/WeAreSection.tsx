@@ -37,7 +37,7 @@ const WeAreSection = () => {
                             We Are,
                         </h2>
 
-                        <div className={`mb-8 space-y-4 text-base leading-relaxed text-ink-muted md:text-sm ${notoSans.className}`}>
+                        <div className={`mb-8 space-y-4  text-base leading-relaxed text-ink-muted md:text-sm ${notoSans.className}`}>
                             <p>
                                 A Legacy of Authentic Indian Vegetarian Excellence
                             </p>
