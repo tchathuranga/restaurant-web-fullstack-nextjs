@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import { Lora } from "next/font/google";
 import { Check } from "lucide-react";
 import EventCatering from "@/components/outdoor-catering/EventCatering";
@@ -17,7 +17,7 @@ const lora = Lora({
 export default function OutdoorCatering() {
   return (
     <div>
-      <Banner
+      <ManagedBanner page="outdoor-catering"
         singleImage="/images/outdoorCateringBanner.png"
         content={{
           title: "Catering Services",

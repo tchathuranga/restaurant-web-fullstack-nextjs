@@ -1,17 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import News from '@/models/news'
+import { prisma, withLegacyId } from '@/lib/prisma';
 
 // GET all news
 export async function GET(request: NextRequest) {
   try {
-    await dbConnect();
-    const news = await News.find().sort({ createdAt: -1 });
+    const news = await prisma.news.findMany({ orderBy: { createdAt: 'desc' } });
 
     return NextResponse.json(
       {
         success: true,
-        data: news,
+        data: news.map(withLegacyId),
       },
       { status: 200 }
     );

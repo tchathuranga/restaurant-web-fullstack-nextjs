@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import WhatsNewSection from "@/components/news-feed/WhatsNewSection";
 import { Lora, Noto_Sans } from "next/font/google";
 import SlideUpSection from "@/components/common/SlideUpSection";
@@ -50,7 +50,7 @@ export default function NewsFeed() {
 
     return (
         <div>
-            <Banner
+            <ManagedBanner page="news-feed"
                 singleImage="/images/newsFeedBanner.png"
                 content={{
                     title: "News & Updates",

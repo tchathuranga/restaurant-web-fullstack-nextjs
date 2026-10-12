@@ -3,6 +3,7 @@
 import { Lora, Noto_Sans } from "next/font/google";
 import { MapPin, Clock, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import { useBranches } from "@/components/common/useBranches";
 
 const lora = Lora({
     weight: ['400', '500', '600', '700'],
@@ -14,53 +15,8 @@ const notoSans = Noto_Sans({
     subsets: ['latin'],
 });
 
-interface RestaurantBranch {
-    id: number;
-    name: string;
-    address: string;
-    hours: string;
-    phone: string;
-}
-
-const branches: RestaurantBranch[] = [
-    {
-        id: 1,
-        name: "Sri Vihar Restaurant Two",
-        address: "123 Thummulla Road, Colombo 05",
-        hours: "10:00 AM - 10:00 PM",
-        phone: "+94 11 2584739"
-    },
-    {
-        id: 2,
-        name: "Sri Vihar Restaurant 3",
-        address: "456 Galle Road, Colombo 03",
-        hours: "10:00 AM - 10:00 PM",
-        phone: "+94 11 2584740"
-    },
-    {
-        id: 3,
-        name: "Sri Vihar Restaurant 4",
-        address: "789 Kandy Road, Kandy",
-        hours: "10:00 AM - 10:00 PM",
-        phone: "+94 11 2584741"
-    },
-    {
-        id: 4,
-        name: "Sri Vihar Restaurant Thummulla",
-        address: "321 Thummulla Road, Colombo 05",
-        hours: "10:00 AM - 10:00 PM",
-        phone: "+94 11 2584742"
-    },
-    {
-        id: 5,
-        name: "Sri Vihar Restaurant Dehiwala",
-        address: "654 Galle Road, Dehiwala",
-        hours: "10:00 AM - 10:00 PM",
-        phone: "+94 11 2584743"
-    }
-];
-
 export default function Branches() {
+    const { branches } = useBranches();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -140,7 +96,7 @@ export default function Branches() {
                 >
                     {branches.map((branch) => (
                         <div
-                            key={branch.id}
+                            key={branch._id}
                             className="sv-card w-85 flex-shrink-0 p-6"
                         >
                             {/* Location */}

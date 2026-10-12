@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import NewsField from "@/components/common/NewsField";
 import PopularDishes from "@/components/home/PopularDishes";
 import OurValues from "@/components/home/OurValues";
@@ -68,7 +68,7 @@ export default function Home() {
     }, []);
   return (
     <div>
-      <Banner
+      <ManagedBanner page="home"
         sliderImages={[
           "/images/here-slider/hero-1.png",
           "/images/here-slider/hero-2.png",

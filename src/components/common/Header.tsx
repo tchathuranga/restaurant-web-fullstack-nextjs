@@ -7,72 +7,15 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import {
   NAVIGATION_LINKS,
-  FOOD_MENU_ITEMS,
 } from "@/const/headerContens";
 import { getAllNews } from "@/services/newsService";
 import { NewsProps } from "@/interfaces/news";
+import { useBranches } from "@/components/common/useBranches";
+import { useMenuCategories } from "@/components/common/useMenuCategories";
 
 type OrderOption = "Uber" | "PickMe";
 
 const ORDER_OPTIONS: OrderOption[] = ["Uber", "PickMe"];
-
-const BRANCHES = [
-  {
-    id: 1,
-    name: "Sri Vihar – Thummulla",
-    address: "3, Sri Sambuddhathva Jayanthi Mawatha, Colombo 05, Sri Lanka",
-    hours: "10:00 AM - 10:00 PM",
-    phone: "+94 11 259 6597",
-    orderLinks: {
-      Uber: "https://www.ubereats.com/lk/store/sri-vihar-havelock/SAO0JNhOQeKKtYKeE4V0IA",
-      PickMe: "https://food.pickme.lk/",
-    },
-  },
-  {
-    id: 2,
-    name: "Sri Vihar – Nugegoda",
-    address: "280 High Level Road, Nugegoda, Sri Lanka",
-    hours: "10:00 AM - 10:00 PM",
-    phone: "+94 11 282 9298",
-    orderLinks: {
-      Uber: "https://www.ubereats.com/lk/store/sri-vihar-nugegoda/xEm-qJG8SvaLzY_A7aV_sA",
-      PickMe: "https://food.pickme.lk/",
-    },
-  },
-  {
-    id: 3,
-    name: "Sri Vihar – Kelaniya",
-    address: "No 10, Vihara MAwatha, Kelaniya",
-    hours: "10:00 AM - 10:00 PM",
-    phone: "0112 269 099",
-    orderLinks: {
-      Uber: "https://www.ubereats.com/lk/search?q=Sri%20Vihar%20Kelaniya",
-      PickMe: "https://food.pickme.lk/",
-    },
-  },
-  {
-    id: 4,
-    name: "Sri Vihar – Dehiwala",
-    address: "No 27, Station road, Dehiwala",
-    hours: "10:00 AM - 10:00 PM",
-    phone: "0112 734 343",
-    orderLinks: {
-      Uber: "https://www.ubereats.com/lk/search?q=Sri%20Vihar%20Dehiwala",
-      PickMe: "https://food.pickme.lk/",
-    },
-  },
-  {
-    id: 5,
-    name: "Sri Vihar – Wattala",
-    address: "No 313, Negombo road, Wattala",
-    hours: "10:00 AM - 10:00 PM",
-    phone: "0112 949 422",
-    orderLinks: {
-      Uber: "https://www.ubereats.com/lk/search?q=Sri%20Vihar%20Wattala",
-      PickMe: "https://food.pickme.lk/",
-    },
-  },
-];
 
 const ORDER_OPTION_LINK_CLASS =
   "block w-full rounded-2xl border border-gold/40 bg-ivory px-3 py-2.5 text-center text-sm text-ink hover:bg-cream";
@@ -83,10 +26,24 @@ const Header = () => {
   const [showOpeningHours, setShowOpeningHours] = useState(false);
   const [showOrderOnline, setShowOrderOnline] = useState(false);
   const [showFoodMenu, setShowFoodMenu] = useState(false);
-  const [selectedOrderBranch, setSelectedOrderBranch] = useState<number | null>(null);
+  const [selectedOrderBranch, setSelectedOrderBranch] = useState<string | null>(null);
   const [activeLink, setActiveLink] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [newsData, setNewsData] = useState<NewsProps[]>([]);
+  const { branches } = useBranches();
+  const foodMenuItems = [{ name: "All" }, ...useMenuCategories()];
+
+  const BRANCHES = branches.map((branch) => ({
+    id: branch._id as string,
+    name: branch.name,
+    address: branch.address,
+    hours: branch.hours,
+    phone: branch.phone,
+    orderLinks: {
+      Uber: branch.uberUrl || "",
+      PickMe: branch.pickmeUrl || "",
+    },
+  }));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -254,7 +211,7 @@ const Header = () => {
               {showFoodMenu && (
                 <div className="absolute top-full left-0 z-50 mt-2 w-52 overflow-hidden rounded-2xl border border-gold/40 bg-ivory shadow-xl">
                   <div className="py-2">
-                    {FOOD_MENU_ITEMS.map((item) => {
+                    {foodMenuItems.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
                         item.name,
                       )}`;
@@ -318,7 +275,7 @@ const Header = () => {
                     </p>
                     {selectedBranch ? (
                       <div className="grid gap-2">
-                        {ORDER_OPTIONS.map((option) => (
+                        {ORDER_OPTIONS.filter((option) => selectedBranch.orderLinks[option]).map((option) => (
                           <a
                             key={option}
                             href={selectedBranch.orderLinks[option]}
@@ -445,7 +402,7 @@ const Header = () => {
                     <div className="mt-4 rounded-2xl border border-gold/30 bg-cream/70 p-3">
                       <p className="sv-eyebrow mb-2">Choose delivery option</p>
                       <div className="grid gap-2">
-                        {ORDER_OPTIONS.map((option) => (
+                        {ORDER_OPTIONS.filter((option) => selectedBranch.orderLinks[option]).map((option) => (
                           <a
                             key={option}
                             href={selectedBranch.orderLinks[option]}
@@ -539,7 +496,7 @@ const Header = () => {
                 {/* Food Menu Dropdown in Mobile */}
                 {showFoodMenu && (
                   <div className="border-t border-gold/30 bg-cream/60">
-                    {FOOD_MENU_ITEMS.map((item) => {
+                    {foodMenuItems.map((item) => {
                       const encodedHref = `/food-menu?category=${encodeURIComponent(
                         item.name,
                       )}`;

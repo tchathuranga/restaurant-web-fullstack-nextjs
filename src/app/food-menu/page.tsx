@@ -2,14 +2,14 @@
 
 import { useMemo, useRef, useCallback, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import { Lora, Noto_Sans } from "next/font/google";
 import FilterBar from "@/components/food-menu/FilterBar";
 import Dishes from "@/components/food-menu/Dishes";
-import { FOOD_MENU_ITEMS } from "@/const/headerContens";
+import { useMenuCategories } from "@/components/common/useMenuCategories";
 import { ItemProps } from "@/interfaces/Items";
 import { fetchAllItems } from "@/services/ItemService";
-import { getSubcategory, sortSubcategories } from "@/const/itemSubcategories";
+import { getSubcategory } from "@/const/itemSubcategories";
 
 const lora = Lora({
   weight: ["400", "500", "600", "700"],
@@ -25,7 +25,8 @@ function FoodMenuContent() {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const subcategoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const topRef = useRef<HTMLDivElement | null>(null);
-  const sections = useMemo(() => FOOD_MENU_ITEMS.filter((section) => section.name !== "All"), []);
+  const sections = useMenuCategories();
+  const menuItems = useMemo(() => [{ name: "All" }, ...sections], [sections]);
   const searchParams = useSearchParams();
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
@@ -54,7 +55,7 @@ function FoodMenuContent() {
     fetchItems();
   }, []);
 
-  const selectedCategory = FOOD_MENU_ITEMS[selectedFilterIndex]?.name || "All";
+  const selectedCategory = menuItems[selectedFilterIndex]?.name || "All";
 
   const categorySubcategories = useMemo(() => {
     if (selectedCategory === "All") return [];
@@ -67,15 +68,19 @@ function FoodMenuContent() {
       )
     );
 
-    return sortSubcategories(selectedCategory, names);
-  }, [ItemData, selectedCategory]);
+    const preferred = sections.find((section) => section.name === selectedCategory)?.subcategories || [];
+    return [
+      ...preferred.filter((name) => names.includes(name)),
+      ...names.filter((name) => !preferred.includes(name)).sort(),
+    ];
+  }, [ItemData, selectedCategory, sections]);
 
   const handleFilterSelect = useCallback(
     (dishName: string, menuIndexParam?: number) => {
       const menuIndex =
         typeof menuIndexParam === "number"
           ? menuIndexParam
-          : FOOD_MENU_ITEMS.findIndex((item) => item.name === dishName);
+          : menuItems.findIndex((item) => item.name === dishName);
 
       setSelectedFilterIndex(menuIndex >= 0 ? menuIndex : 0);
       setSelectedSubcategory(null);
@@ -126,7 +131,7 @@ function FoodMenuContent() {
 
   const handleSubcategoryToggle = useCallback(
     (categoryName: string, subcategory: string) => {
-      const categoryIndex = FOOD_MENU_ITEMS.findIndex((item) => item.name === categoryName);
+      const categoryIndex = menuItems.findIndex((item) => item.name === categoryName);
       if (categoryIndex >= 0) {
         setSelectedFilterIndex(categoryIndex);
       }
@@ -140,7 +145,7 @@ function FoodMenuContent() {
     const handler = ((event: Event) => {
       const customEvent = event as CustomEvent<string>;
       if (!customEvent.detail) return;
-      const menuIndex = FOOD_MENU_ITEMS.findIndex((item) => item.name === customEvent.detail);
+      const menuIndex = menuItems.findIndex((item) => item.name === customEvent.detail);
       handleFilterSelect(customEvent.detail, menuIndex);
     }) as EventListener;
 
@@ -156,14 +161,14 @@ function FoodMenuContent() {
     const category = searchParams.get("category");
     if (category) {
       const decodedCategory = decodeURIComponent(category);
-      const menuIndex = FOOD_MENU_ITEMS.findIndex((item) => item.name === decodedCategory);
+      const menuIndex = menuItems.findIndex((item) => item.name === decodedCategory);
       handleFilterSelect(decodedCategory, menuIndex);
     }
   }, [handleFilterSelect, searchParams]);
 
   return (
     <div ref={topRef}>
-      <Banner
+      <ManagedBanner page="food-menu"
         singleImage="/images/foodMenuBanner.png"
         content={{
           title: "Our Menu",
@@ -176,6 +181,7 @@ function FoodMenuContent() {
 
       <div className="sticky top-0 z-100">
         <FilterBar
+          items={menuItems}
           activeIndex={selectedFilterIndex}
           onSelect={handleFilterSelect}
           subcategories={categorySubcategories}
@@ -204,6 +210,7 @@ function FoodMenuContent() {
           >
             <Dishes
               title={section.name}
+              subcategoryOrder={section.subcategories}
               itemsData={ItemData}
               expandedSubcategory={
                 selectedCategory === "All" || selectedCategory === section.name
@@ -227,7 +234,7 @@ export default function FoodMenu() {
     <Suspense
       fallback={
         <div>
-          <Banner
+          <ManagedBanner page="food-menu"
             singleImage="/images/foodMenuBanner.png"
             content={{
               title: "Our Menu",

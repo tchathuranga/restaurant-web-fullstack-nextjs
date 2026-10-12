@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import { Lora, Noto_Sans } from "next/font/google";
 import Branches from "@/components/contact-us/Branches";
 import SendMessage from "@/components/contact-us/SendMessage";
@@ -20,7 +20,7 @@ const notoSans = Noto_Sans({
 export default function ContactUs() {
   return (
     <div>
-      <Banner
+      <ManagedBanner page="contact-us"
         singleImage="/images/contactUsBanner.png"
         content={{
           title: "Contact Us",

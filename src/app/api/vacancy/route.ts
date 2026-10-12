@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import Vacancy from '@/models/vacancy';
+import { prisma, withLegacyId } from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
-    await dbConnect();
-
-    const vacancies = await Vacancy.find().sort({ createdAt: -1 });
+    const vacancies = await prisma.vacancy.findMany({ orderBy: { createdAt: 'desc' } });
 
     return NextResponse.json(
       {
         success: true,
-        data: vacancies,
+        data: vacancies.map(withLegacyId),
       },
       { status: 200 }
     );
@@ -23,5 +20,5 @@ export async function GET(request: NextRequest) {
       },
       { status: 500 }
     );
-  } 
+  }
 }

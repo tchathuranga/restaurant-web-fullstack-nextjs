@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import promotions from '@/models/promotions';
+import { prisma, withLegacyId } from '@/lib/prisma';
 
 // GET all promotions
 export async function GET(request: NextRequest) {
   try {
-    await dbConnect();
-    const promotionItems = await promotions.find().sort({ createdAt: -1 });
+    const promotionItems = await prisma.promotion.findMany({ orderBy: { createdAt: 'desc' } });
     return NextResponse.json(
       {
         success: true,
-        data: promotionItems,
+        data: promotionItems.map(withLegacyId),
       },
       { status: 200 }
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import { Lora, Noto_Sans } from "next/font/google";
 import CurrentJobs from "@/components/join-the-team/CurrentJobs";
 import FutureJobs from "@/components/join-the-team/FutureJobs";
@@ -43,7 +43,7 @@ export default function JoinTheTeam() {
 
   return (
     <div>
-      <Banner
+      <ManagedBanner page="join-the-team"
         singleImage="/images/joinTheTeamBanner.png"
         content={{
           title: "Join Our Team",

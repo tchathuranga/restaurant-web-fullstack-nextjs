@@ -1,8 +1,7 @@
 "use client";
 
-import { FOOD_MENU_ITEMS } from "@/const/headerContens";
-
 interface FilterBarProps {
+  items: { name: string }[];
   activeIndex: number;
   onSelect?: (dishName: string, index: number) => void;
   subcategories?: string[];
@@ -11,6 +10,7 @@ interface FilterBarProps {
 }
 
 export default function FilterBar({
+  items,
   activeIndex,
   onSelect,
   subcategories = [],
@@ -20,7 +20,7 @@ export default function FilterBar({
   return (
     <div className="sv-band mb-4 border-b border-gold/30">
       <div className="flex flex-wrap justify-center gap-3 px-3 py-4 md:gap-4">
-        {FOOD_MENU_ITEMS.map((dish, index) => (
+        {items.map((dish, index) => (
           <button
             key={dish.name}
             onClick={() => {
