@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { useBranches } from '@/components/common/useBranches';
+import { shortBranchName, joinNames } from '@/const/branches';
 import { Noto_Sans, Lora } from 'next/font/google';
 
 const notoSans = Noto_Sans({
@@ -12,6 +16,8 @@ const lora = Lora({
 });
 
 const WeAreSection = () => {
+  const branchNames = useBranches().branches.map((branch) => shortBranchName(branch.name));
+
     return (
         <div className="mx-auto px-6 py-12 sm:px-10 md:px-20 lg:px-30">
             <div className="container mx-auto max-w-7xl">
@@ -47,7 +53,7 @@ const WeAreSection = () => {
                              </p>
 
                             <p>
-                                With branches in Thunmulla, Nugegoda, Kelaniya, Dehiwala, and Wattala, Sri Vihar continues to bring the authentic flavours of India closer to communities across the island. Every dish is crafted using premium ingredients, carefully selected spices, and traditional cooking techniques that honour centuries-old recipes. From aromatic curries and freshly prepared breads to signature dosas and sweets, every meal reflects our unwavering commitment to freshness, consistency, and excellence.
+                                {branchNames.length > 0 ? `With branches in ${joinNames(branchNames)}, Sri Vihar` : "With branches across the island, Sri Vihar"} continues to bring the authentic flavours of India closer to communities across the island. Every dish is crafted using premium ingredients, carefully selected spices, and traditional cooking techniques that honour centuries-old recipes. From aromatic curries and freshly prepared breads to signature dosas and sweets, every meal reflects our unwavering commitment to freshness, consistency, and excellence.
                             </p>
 
                             <p>

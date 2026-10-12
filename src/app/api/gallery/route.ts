@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import gallery from '@/models/gallery';
+import { prisma, withLegacyId } from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
-    await dbConnect();
-    const galleryItems = await gallery.find().sort({ createdAt: -1 });
+    const galleryItems = await prisma.gallery.findMany({ orderBy: { createdAt: 'desc' } });
     return NextResponse.json(
       {
         success: true,
-        data: galleryItems,
+        data: galleryItems.map(withLegacyId),
       },
       { status: 200 }
     );

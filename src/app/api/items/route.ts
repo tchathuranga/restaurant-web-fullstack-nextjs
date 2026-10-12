@@ -1,34 +1,29 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import Item from '@/models/Items';
+import { prisma, withLegacyId } from '@/lib/prisma';
 import { getSubcategory } from '@/const/itemSubcategories';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    await dbConnect();
-
-    const rawItems = await Item.collection.find({}).toArray();
+    const rawItems = await prisma.item.findMany({ orderBy: { createdAt: 'asc' } });
     const missingSubcategory = rawItems.filter((item) => !item.subcategory);
 
+    // Backfill the subcategory for older items so it is only derived once
     if (missingSubcategory.length > 0) {
-      await Item.collection.bulkWrite(
-        missingSubcategory.map((item) => ({
-          updateOne: {
-            filter: { _id: item._id },
-            update: {
-              $set: {
-                subcategory: getSubcategory(item.title, item.category),
-              },
-            },
-          },
-        }))
+      await prisma.$transaction(
+        missingSubcategory.map((item) => {
+          item.subcategory = getSubcategory(item.title, item.category);
+          return prisma.item.update({
+            where: { id: item.id },
+            data: { subcategory: item.subcategory },
+          });
+        })
       );
     }
 
-    const data = await Item.find({});
-
     return NextResponse.json(
-      { success: true, data },
+      { success: true, data: rawItems.map(withLegacyId) },
       { status: 200 }
     );
   } catch (error) {

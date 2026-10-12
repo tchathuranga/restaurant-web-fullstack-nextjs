@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import WeAreSection from "@/components/our-story/WeAreSection";
 import OurLocationsSection from "@/components/our-story/OurLocationsSection";
 import GallerySection from "@/components/our-story/GallerySection";
@@ -43,7 +43,7 @@ export default function OurStory() {
   }, []);
   return (
     <div>
-      <Banner
+      <ManagedBanner page="our-story"
         singleImage="/images/ourStoryBanner.jpeg"
         content={{
           title: "Our Story...",

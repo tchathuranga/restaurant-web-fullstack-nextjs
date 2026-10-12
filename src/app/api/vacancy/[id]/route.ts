@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "@/lib/mongodb";
-import { Types } from "mongoose";
-import Vacancy from "@/models/vacancy";
+import { prisma, withLegacyId } from "@/lib/prisma";
 
 // GET single vacancy by ID
 export async function GET(
@@ -9,22 +7,9 @@ export async function GET(
   context: { params: Promise<{ id: string }> },
 ) {
   try {
-    await dbConnect();
-
     const { id } = await context.params;
 
-    // Validate MongoDB ObjectId
-    if (!Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid vacancy ID",
-        },
-        { status: 400 },
-      );
-    }
-
-    const vacancy = await Vacancy.findById(id);
+    const vacancy = await prisma.vacancy.findUnique({ where: { id } });
 
     if (!vacancy) {
       return NextResponse.json(
@@ -39,7 +24,7 @@ export async function GET(
     return NextResponse.json(
       {
         success: true,
-        data: vacancy,
+        data: withLegacyId(vacancy),
       },
       { status: 200 },
     );

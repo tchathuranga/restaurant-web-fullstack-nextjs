@@ -4,7 +4,7 @@ import { MutableRefObject } from "react";
 import Image from "next/image";
 import { Lora, Noto_Sans, Caveat } from "next/font/google";
 import { ItemProps } from "@/interfaces/Items";
-import { getSubcategory, sortSubcategories } from "@/const/itemSubcategories";
+import { getSubcategory } from "@/const/itemSubcategories";
 import SubcategoryShowcase from "./SubcategoryShowcase";
 import { MandalaRing, OrnamentDivider, PaisleyCorner } from "./IndianMotifs";
 
@@ -25,6 +25,8 @@ const caveat = Caveat({
 
 interface DishesProps {
   title: string;
+  /** Subcategory display order managed in the dashboard */
+  subcategoryOrder?: string[];
   itemsData: ItemProps[];
   expandedSubcategory?: string | null;
   onSubcategoryToggle?: (subcategory: string) => void;
@@ -33,6 +35,7 @@ interface DishesProps {
 
 export default function Dishes({
   title,
+  subcategoryOrder = [],
   itemsData,
   expandedSubcategory = null,
   onSubcategoryToggle,
@@ -41,16 +44,15 @@ export default function Dishes({
   const itemsToRender = itemsData.filter((item) => item.category === title);
   const hasItems = itemsToRender.length > 0;
 
-  const groupedSubcategories = sortSubcategories(
-    title,
-    Array.from(
-      new Set(
-        itemsToRender.map(
-          (item) => item.subcategory || getSubcategory(item.title, item.category)
-        )
-      )
+  const names = Array.from(
+    new Set(
+      itemsToRender.map((item) => item.subcategory || getSubcategory(item.title, item.category))
     )
   );
+  const groupedSubcategories = [
+    ...subcategoryOrder.filter((name) => names.includes(name)),
+    ...names.filter((name) => !subcategoryOrder.includes(name)).sort(),
+  ];
 
   return (
     <div className="lg:px-30 md:px-20 sm:px-10 pt-10">

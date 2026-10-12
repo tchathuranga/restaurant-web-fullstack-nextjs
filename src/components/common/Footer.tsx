@@ -10,6 +10,8 @@ import {
   MapPin,
 } from "lucide-react";
 import Link from "next/link";
+import { useBranches } from "@/components/common/useBranches";
+import { shortBranchName } from "@/const/branches";
 
 const notoSans = Noto_Sans({
   weight: ["300", "400", "500", "600", "700"],
@@ -19,15 +21,9 @@ const notoSans = Noto_Sans({
 // Set to true to show the Facebook link in the footer
 const SHOW_FACEBOOK = false;
 
-const BRANCHES = [
-  "Thummulla",
-  "Nugegoda",
-  "Kelaniya",
-  "Dehiwala",
-  "Wattala"
-];
-
 export default function Footer() {
+  const BRANCHES = useBranches().branches.map((branch) => shortBranchName(branch.name));
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-maroon to-maroon-deep pt-12 pb-6 text-ivory">
       <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-gold via-saffron to-gold" />

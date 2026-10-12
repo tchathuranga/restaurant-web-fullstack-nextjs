@@ -3,7 +3,7 @@
 import { Lora, Noto_Sans } from "next/font/google";
 import { MapPin, Clock, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import Banner from "@/components/common/Banner";
+import ManagedBanner from "@/components/common/ManagedBanner";
 import ApplyJob from "@/components/join-the-team/ApplyJob";
 import WhyJoinUs from "@/components/join-the-team/WhyJoinUs";
 import { useEffect, useState } from "react";
@@ -81,7 +81,7 @@ export default function JobDetailPage({ params }: PageProps) {
 
   return (
     <div>
-      <Banner
+      <ManagedBanner page="join-the-team"
         singleImage="/images/joinTheTeamBanner.png"
         content={{
           title: vacancyData.title,
