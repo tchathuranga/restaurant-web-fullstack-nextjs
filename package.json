@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build",
     "build:linux": "export NODE_OPTIONS=--max-old-space-size=4096 && next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "eslint",
     "postinstall": "prisma generate"
   },
